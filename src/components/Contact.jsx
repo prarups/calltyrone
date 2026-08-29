@@ -33,13 +33,13 @@ export default function Contact({ onOpenDownloadGuide }) {
         
         {/* Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
             <Mail className="w-3.5 h-3.5" />
             <span>24/7 Headquarters & Fleet Inquiries</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            CONTACT <span className="text-red-500">MOBILE TIRE PLUS</span>
+            CONTACT <span className="text-blue-500">MOBILE TIRE PLUS</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
@@ -54,7 +54,7 @@ export default function Contact({ onOpenDownloadGuide }) {
             
             {/* Phone Card */}
             <div className="glass-panel p-5 rounded-2xl border border-slate-800 flex items-start gap-4">
-              <div className="p-3 bg-red-600/20 text-red-400 rounded-xl border border-red-500/30 shrink-0">
+              <div className="p-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-500/30 shrink-0">
                 <PhoneCall className="w-6 h-6" />
               </div>
               <div className="space-y-1">
@@ -68,7 +68,7 @@ export default function Contact({ onOpenDownloadGuide }) {
 
             {/* Email Card */}
             <div className="glass-panel p-5 rounded-2xl border border-slate-800 flex items-start gap-4">
-              <div className="p-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-500/30 shrink-0">
+              <div className="p-3 bg-indigo-600/20 text-indigo-400 rounded-xl border border-indigo-500/30 shrink-0">
                 <Mail className="w-6 h-6" />
               </div>
               <div className="space-y-1">
@@ -91,14 +91,14 @@ export default function Contact({ onOpenDownloadGuide }) {
             </div>
 
             {/* Download Guide Banner Button */}
-            <div className="glass-panel-danger p-5 rounded-2xl flex items-center justify-between gap-4">
+            <div className="glass-panel-accent p-5 rounded-2xl flex items-center justify-between gap-4">
               <div className="space-y-0.5">
                 <h4 className="font-heading font-bold text-white text-sm">Download Emergency Guide</h4>
                 <p className="text-xs text-slate-300">Free glovebox safety & tire sidewall guide PDF.</p>
               </div>
               <button
                 onClick={onOpenDownloadGuide}
-                className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shrink-0 uppercase tracking-wider transition-all shadow"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shrink-0 uppercase tracking-wider transition-all shadow"
               >
                 Download Guide
               </button>
@@ -136,7 +136,7 @@ export default function Contact({ onOpenDownloadGuide }) {
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         placeholder="John Doe"
-                        className="w-full bg-slate-950 border border-slate-800 focus:border-red-500 rounded-xl px-4 py-3 text-xs text-white outline-none"
+                        className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-4 py-3 text-xs text-white outline-none"
                       />
                     </div>
 
@@ -148,7 +148,7 @@ export default function Contact({ onOpenDownloadGuide }) {
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         placeholder="john@company.com"
-                        className="w-full bg-slate-950 border border-slate-800 focus:border-red-500 rounded-xl px-4 py-3 text-xs text-white outline-none"
+                        className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-4 py-3 text-xs text-white outline-none"
                       />
                     </div>
                   </div>
@@ -160,7 +160,7 @@ export default function Contact({ onOpenDownloadGuide }) {
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       placeholder="(555) 000-0000"
-                      className="w-full bg-slate-950 border border-slate-800 focus:border-red-500 rounded-xl px-4 py-3 text-xs text-white outline-none"
+                      className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-4 py-3 text-xs text-white outline-none"
                     />
                   </div>
 
@@ -172,13 +172,13 @@ export default function Contact({ onOpenDownloadGuide }) {
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Details regarding your vehicle fleet or service inquiry..."
-                      className="w-full bg-slate-950 border border-slate-800 focus:border-red-500 rounded-xl px-4 py-3 text-xs text-white outline-none resize-none"
+                      className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-4 py-3 text-xs text-white outline-none resize-none"
                     ></textarea>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md flex items-center justify-center gap-2"
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
                     <span>Send Message To Operations</span>

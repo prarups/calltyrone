@@ -23,7 +23,7 @@ export default function TechnicianCard({ technician = BUSINESS_CONFIG.demoTechni
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-3">
         <h4 className="font-heading text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
-          <Truck className="w-5 h-5 text-red-500" />
+          <Truck className="w-5 h-5 text-blue-500" />
           Assigned Mobile Technician
         </h4>
         <span className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
@@ -40,7 +40,7 @@ export default function TechnicianCard({ technician = BUSINESS_CONFIG.demoTechni
           <img
             src={technician.photo}
             alt={technician.name}
-            className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-red-500/60 shadow-lg"
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-blue-500/60 shadow-lg"
           />
           <div className="absolute -bottom-2 -right-1 bg-amber-500 text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded shadow">
             ASE CERT
@@ -90,7 +90,7 @@ export default function TechnicianCard({ technician = BUSINESS_CONFIG.demoTechni
       <div className="grid grid-cols-2 gap-3 pt-2">
         <a
           href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-          className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-xs py-3 rounded-xl shadow-md transition-all uppercase tracking-wider"
+          className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs py-3 rounded-xl shadow-md transition-all uppercase tracking-wider"
         >
           <Phone className="w-4 h-4" />
           <span>Call Technician</span>

@@ -111,13 +111,13 @@ export default function TrackingPage({ requestData, onBackToHome }) {
 
             <div>
               <div className="flex items-center gap-2">
-                <span className="bg-red-600/20 border border-red-500/40 text-red-400 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider">
+                <span className="bg-blue-600/20 border border-blue-500/40 text-blue-400 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider">
                   Live Dispatch Tracking
                 </span>
                 <span className="text-xs text-slate-400 font-mono">ID: #{activeRequest.id}</span>
               </div>
               <h1 className="font-heading text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-                REAL-TIME <span className="text-red-500">SERVICE TRACKER</span>
+                REAL-TIME <span className="text-blue-500">SERVICE TRACKER</span>
               </h1>
             </div>
           </div>
@@ -129,11 +129,11 @@ export default function TrackingPage({ requestData, onBackToHome }) {
               value={requestIdInput}
               onChange={(e) => setRequestIdInput(e.target.value)}
               placeholder="Enter Request # (e.g. MTP-28491)"
-              className="bg-slate-900 border border-slate-800 focus:border-red-500 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none w-full sm:w-56"
+              className="bg-slate-900 border border-slate-800 focus:border-blue-500 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none w-full sm:w-56"
             />
             <button
               type="submit"
-              className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all uppercase tracking-wider shrink-0"
+              className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all uppercase tracking-wider shrink-0"
             >
               Track
             </button>
@@ -143,9 +143,9 @@ export default function TrackingPage({ requestData, onBackToHome }) {
 
         {/* Cancelled Banner State */}
         {isCancelled && (
-          <div className="bg-red-950/70 border border-red-500 text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in duration-300">
+          <div className="bg-amber-950/70 border border-amber-500 text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in duration-300">
             <div className="flex items-center gap-3">
-              <XCircle className="w-8 h-8 text-red-400 shrink-0" />
+              <XCircle className="w-8 h-8 text-amber-400 shrink-0" />
               <div>
                 <h3 className="font-bold text-lg">Service Request Cancelled</h3>
                 <p className="text-xs text-slate-300">Reason: {cancelReason}. Technician unit #408 has been released from your location.</p>
@@ -179,7 +179,7 @@ export default function TrackingPage({ requestData, onBackToHome }) {
 
             {/* Distance */}
             <div className="glass-panel p-4 rounded-xl border border-slate-800 flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400">
+              <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400">
                 <Navigation className="w-6 h-6" />
               </div>
               <div>
@@ -257,7 +257,7 @@ export default function TrackingPage({ requestData, onBackToHome }) {
 
               <button
                 onClick={() => setShowCancelModal(true)}
-                className="flex items-center gap-1.5 text-red-400 hover:text-red-300 font-bold px-3 py-1.5 rounded-lg hover:bg-red-950/40 transition-colors ml-auto"
+                className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-bold px-3 py-1.5 rounded-lg hover:bg-amber-950/40 transition-colors ml-auto"
               >
                 <XCircle className="w-4 h-4" />
                 <span>Cancel Request</span>
@@ -270,9 +270,9 @@ export default function TrackingPage({ requestData, onBackToHome }) {
             <TechnicianCard technician={activeRequest.technician} />
 
             {/* Hotline Help Box */}
-            <div className="glass-panel-danger p-5 rounded-2xl space-y-3">
+            <div className="glass-panel p-5 rounded-2xl space-y-3 border border-blue-500/30 bg-blue-950/20">
               <h4 className="font-heading text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                <PhoneCall className="w-4 h-4 text-red-500" />
+                <PhoneCall className="w-4 h-4 text-blue-500" />
                 24/7 Dispatch Control Center
               </h4>
               <p className="text-xs text-slate-300">
@@ -280,7 +280,7 @@ export default function TrackingPage({ requestData, onBackToHome }) {
               </p>
               <a
                 href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-                className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-3 rounded-xl uppercase tracking-wider transition-all shadow-md"
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-xl uppercase tracking-wider transition-all shadow-md"
               >
                 <PhoneCall className="w-4 h-4" />
                 <span>Call Hotline ({BUSINESS_CONFIG.phone})</span>
@@ -296,7 +296,7 @@ export default function TrackingPage({ requestData, onBackToHome }) {
       {showCancelModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-5 relative shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center border border-red-500/40">
+            <div className="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/40">
               <AlertTriangle className="w-6 h-6" />
             </div>
 
@@ -331,7 +331,7 @@ export default function TrackingPage({ requestData, onBackToHome }) {
               </button>
               <button
                 onClick={handleConfirmCancel}
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-3 rounded-xl uppercase tracking-wider shadow-md"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-xl uppercase tracking-wider shadow-md"
               >
                 Confirm Cancel
               </button>

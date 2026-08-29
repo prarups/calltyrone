@@ -58,12 +58,12 @@ export default function HowItWorks({ onRequestService }) {
         
         {/* Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
             <span>Seamless 5-Step Process</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            HOW MOBILE TIRE <span className="text-red-500">PLUS WORKS</span>
+            HOW MOBILE TIRE <span className="text-blue-500">PLUS WORKS</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
@@ -76,11 +76,11 @@ export default function HowItWorks({ onRequestService }) {
           {steps.map((step, idx) => {
             const Icon = step.icon;
             return (
-              <div key={idx} className="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 relative flex flex-col justify-between hover:border-red-500/50 transition-all group">
+              <div key={idx} className="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 relative flex flex-col justify-between hover:border-blue-500/50 transition-all group">
                 
                 {/* Step Header */}
                 <div className="flex items-center justify-between">
-                  <span className="font-heading font-black text-3xl text-red-500/80 group-hover:text-red-400 transition-colors">
+                  <span className="font-heading font-black text-3xl text-blue-500/80 group-hover:text-blue-400 transition-colors">
                     {step.num}
                   </span>
                   <span className="bg-slate-950 border border-slate-800 text-slate-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">
@@ -89,7 +89,7 @@ export default function HowItWorks({ onRequestService }) {
                 </div>
 
                 {/* Step Icon */}
-                <div className="w-12 h-12 rounded-xl bg-red-600/10 border border-red-500/30 text-red-400 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/30 text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <Icon className="w-6 h-6" />
                 </div>
 
@@ -108,7 +108,7 @@ export default function HowItWorks({ onRequestService }) {
         <div className="text-center pt-4">
           <button
             onClick={onRequestService}
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold text-sm px-8 py-3.5 rounded-xl shadow-xl shadow-red-950/60 uppercase tracking-wide transition-all transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-sm px-8 py-3.5 rounded-xl shadow-xl shadow-blue-950/60 uppercase tracking-wide transition-all transform hover:-translate-y-0.5"
           >
             <span>Start Service Request Now</span>
             <ArrowRight className="w-4 h-4" />

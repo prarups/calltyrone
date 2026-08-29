@@ -10,9 +10,9 @@ export default function MobileActionBar({ onRequestService, onOpenTracking, acti
         {/* Call Hotline */}
         <a
           href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-          className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-slate-900 border border-red-500/40 text-red-400 active:scale-95 transition-transform"
+          className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-slate-900 border border-blue-500/40 text-blue-400 active:scale-95 transition-transform"
         >
-          <PhoneCall className="w-5 h-5 text-red-500 mb-0.5 animate-pulse" />
+          <PhoneCall className="w-5 h-5 text-blue-500 mb-0.5 animate-pulse" />
           <span className="text-[10px] font-black uppercase tracking-wider text-white">Call 24/7</span>
         </a>
 
@@ -30,7 +30,7 @@ export default function MobileActionBar({ onRequestService, onOpenTracking, acti
         {/* Request Service */}
         <button
           onClick={onRequestService}
-          className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg shadow-red-900/40 active:scale-95 transition-transform"
+          className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-900/40 active:scale-95 transition-transform"
         >
           <Navigation className="w-5 h-5 mb-0.5" />
           <span className="text-[10px] font-black uppercase tracking-wider">Request Tech</span>

@@ -91,13 +91,13 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
         
         {/* Section Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-2 bg-slate-950/90 border border-red-500/60 text-red-400 text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-full shadow-2xl backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 bg-slate-950/90 border border-blue-500/60 text-blue-400 text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-full shadow-2xl backdrop-blur-md">
             <Navigation className="w-3.5 h-3.5" />
             <span>24/7 Mobile Dispatch Engine</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-2xl">
-            REQUEST MOBILE <span className="bg-gradient-to-r from-red-500 via-red-400 to-amber-400 bg-clip-text text-transparent">ROADSIDE ASSISTANCE</span>
+            REQUEST MOBILE <span className="bg-gradient-to-r from-blue-500 via-indigo-400 to-amber-400 bg-clip-text text-transparent">ROADSIDE ASSISTANCE</span>
           </h2>
 
           <p className="text-slate-200 text-xs sm:text-sm max-w-xl mx-auto font-medium drop-shadow-md">
@@ -138,32 +138,31 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
               </div>
 
               <div>
-                <span className="text-slate-500 block text-[10px] uppercase font-black">Target Location</span>
-                <span className="text-slate-200 font-medium">{submittedRequest.location}</span>
+                <span className="text-slate-500 block text-[10px] uppercase font-black">Dispatch Location</span>
+                <span className="text-white font-medium">{submittedRequest.location}</span>
               </div>
 
               <div>
-                <span className="text-slate-500 block text-[10px] uppercase font-black">Vehicle</span>
-                <span className="text-slate-200 font-medium">{submittedRequest.vehicle}</span>
+                <span className="text-slate-500 block text-[10px] uppercase font-black">Vehicle Details</span>
+                <span className="text-white font-medium">{submittedRequest.vehicle}</span>
               </div>
             </div>
 
-            {/* CTA Buttons */}
+            {/* Actions CTA */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => onOpenTracking(submittedRequest)}
-                className="w-full sm:w-auto flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm px-8 py-3.5 rounded-xl shadow-xl shadow-amber-950/50 uppercase tracking-wider transition-all transform hover:-translate-y-0.5"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl uppercase tracking-wider shadow-lg shadow-amber-950/50 transition-all"
               >
-                <Navigation className="w-5 h-5 shrink-0" />
-                <span>Track Technician Live On Map</span>
-                <ArrowRight className="w-4 h-4 shrink-0" />
+                <Activity className="w-4 h-4" />
+                <span>Track Technician Live GPS Telemetry</span>
               </button>
 
               <button
-                onClick={() => setSubmittedRequest(null)}
-                className="w-full sm:w-auto px-6 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 uppercase tracking-wider"
+                onClick={handleResetForm}
+                className="w-full sm:w-auto text-slate-400 hover:text-white text-xs font-bold px-4 py-3 underline cursor-pointer"
               >
-                Submit New Request
+                Submit Another Request
               </button>
             </div>
           </div>
@@ -176,8 +175,8 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
               {/* Customer Name */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <User className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                  Your Full Name <span className="text-red-500">*</span>
+                  <User className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                  Your Full Name <span className="text-blue-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -186,15 +185,15 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                   placeholder="e.g. David Miller"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
+                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
                 />
               </div>
 
               {/* Phone Number */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                  Callback Phone Number <span className="text-red-500">*</span>
+                  <Phone className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                  Callback Phone Number <span className="text-blue-500">*</span>
                 </label>
                 <input
                   type="tel"
@@ -203,7 +202,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                   placeholder="(555) 000-0000"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
+                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
                 />
               </div>
 
@@ -211,8 +210,8 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
               <div className="md:col-span-2 space-y-1.5">
                 <div className="flex items-center justify-between gap-2">
                   <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                    Current Breakdown Location / Address <span className="text-red-500">*</span>
+                    <MapPin className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    Current Breakdown Location / Address <span className="text-blue-500">*</span>
                   </label>
                   <button
                     type="button"
@@ -231,21 +230,21 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                   placeholder="Street address, highway exit number, or landmark (e.g. I-35W Exit 42)"
                   value={formData.location}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
+                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
                 />
               </div>
 
               {/* Service Required Dropdown */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Disc className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                  Select Required Service <span className="text-red-500">*</span>
+                  <Disc className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                  Select Required Service <span className="text-blue-500">*</span>
                 </label>
                 <select
                   name="serviceId"
                   value={formData.serviceId}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all"
+                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all"
                 >
                   {BUSINESS_CONFIG.services.map(s => (
                     <option key={s.id} value={s.id}>
@@ -258,16 +257,16 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
               {/* Urgency Selection */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                  Service Urgency <span className="text-red-500">*</span>
+                  <Clock className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                  Service Urgency <span className="text-blue-500">*</span>
                 </label>
                 <select
                   name="urgency"
                   value={formData.urgency}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all"
+                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all"
                 >
-                  <option value="immediate">🚨 Immediate Emergency Dispatch (15-30 Min)</option>
+                  <option value="immediate">⚡ Immediate Rapid Dispatch (15-30 Min)</option>
                   <option value="scheduled">📅 Schedule Service For Later Today</option>
                 </select>
               </div>
@@ -275,8 +274,8 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
               {/* Vehicle Specs */}
               <div className="md:col-span-2 space-y-1.5">
                 <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Car className="w-3.5 h-3.5 text-red-500 shrink-0" />
-                  Vehicle Year, Make & Model <span className="text-red-500">*</span>
+                  <Car className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                  Vehicle Year, Make & Model <span className="text-blue-500">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <input
@@ -285,7 +284,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                     placeholder="Year (2022)"
                     value={formData.vehicleYear}
                     onChange={handleChange}
-                    className="bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
+                    className="bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
                   />
                   <input
                     type="text"
@@ -294,7 +293,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                     placeholder="Make & Model (e.g. Ford F-150 / Tesla Y)"
                     value={formData.vehicleMakeModel}
                     onChange={handleChange}
-                    className="sm:col-span-2 bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
+                    className="sm:col-span-2 bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
                   />
                 </div>
               </div>
@@ -315,7 +314,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                     placeholder="e.g. 225/65R17 or 275/55R20"
                     value={formData.tireSize}
                     onChange={handleChange}
-                    className="w-full bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
+                    className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
                   />
                 </div>
               )}
@@ -331,7 +330,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                   placeholder="e.g. Parked on left shoulder near highway exit 22, hazard lights on."
                   value={formData.notes}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-red-500 focus:ring-1 focus:ring-red-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none resize-none"
+                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none resize-none"
                 ></textarea>
               </div>
 
@@ -342,7 +341,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-sm sm:text-base py-4 rounded-xl shadow-2xl shadow-red-950 hover:shadow-red-600/50 uppercase tracking-wider transition-all transform active:scale-98"
+                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm sm:text-base py-4 rounded-xl shadow-2xl shadow-blue-950 hover:shadow-blue-600/50 uppercase tracking-wider transition-all transform active:scale-98"
               >
                 {isSubmitting ? (
                   <>

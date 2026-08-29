@@ -4,7 +4,7 @@ import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function EmergencyBar() {
   return (
-    <div className="bg-gradient-to-r from-red-700 via-red-600 to-amber-600 text-white py-2 px-3 sm:px-6 shadow-xl relative z-50 overflow-hidden">
+    <div className="bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-800 text-white py-2 px-3 sm:px-6 shadow-xl relative z-50 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-4 text-xs">
         
         {/* Left Status Pulse */}
@@ -15,7 +15,7 @@ export default function EmergencyBar() {
           </span>
           <span className="font-extrabold uppercase tracking-wider text-yellow-300 flex items-center gap-1.5 whitespace-nowrap">
             <ShieldAlert className="w-3.5 h-3.5 text-yellow-300 inline shrink-0" />
-            24/7 EMERGENCY ROADSIDE ASSISTANCE — WE COME TO YOU
+            24/7 FAST ROADSIDE ASSISTANCE — WE COME DIRECTLY TO YOU
           </span>
         </div>
 

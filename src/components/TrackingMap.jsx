@@ -42,7 +42,7 @@ export default function TrackingMap({ techProgress, activeStageIndex, onRefreshL
 
           <path 
             d={`M 150,90 C 250,150 450,220 750,330`} 
-            stroke="#e11d48" 
+            stroke="#2563eb" 
             strokeWidth="5" 
             fill="none" 
             strokeLinecap="round"
@@ -68,7 +68,7 @@ export default function TrackingMap({ techProgress, activeStageIndex, onRefreshL
         <div className="flex flex-col">
           <span className="text-[9px] uppercase font-black text-slate-400 tracking-wider">GPS Telemetry</span>
           <span className="text-[11px] font-bold text-white flex items-center gap-1">
-            <Compass className="w-3 h-3 text-red-500 animate-spin-slow shrink-0" />
+            <Compass className="w-3 h-3 text-blue-500 animate-spin-slow shrink-0" />
             Unit #408 • 34 MPH
           </span>
         </div>
@@ -98,14 +98,14 @@ export default function TrackingMap({ techProgress, activeStageIndex, onRefreshL
         style={{ left: `${endX}%`, top: `${endY}%` }}
       >
         <div className="relative flex flex-col items-center">
-          <div className="absolute -inset-3 rounded-full bg-red-600/30 animate-ping"></div>
+          <div className="absolute -inset-3 rounded-full bg-blue-600/30 animate-ping"></div>
           
-          <div className="bg-slate-950/95 border border-red-500 text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-md mb-1 whitespace-nowrap">
+          <div className="bg-slate-950/95 border border-blue-500 text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow-md mb-1 whitespace-nowrap">
             📍 Breakdown Spot
           </div>
           
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl border-2 border-white">
-            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 fill-white text-red-600" />
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-xl border-2 border-white">
+            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 fill-white text-blue-600" />
           </div>
         </div>
       </div>
@@ -122,7 +122,7 @@ export default function TrackingMap({ techProgress, activeStageIndex, onRefreshL
             <span>Tech Marcus (Unit #408)</span>
           </div>
 
-          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-red-600 via-red-700 to-amber-600 text-white flex items-center justify-center shadow-2xl border-2 border-yellow-400 beacon-pulse cursor-pointer">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-amber-500 text-white flex items-center justify-center shadow-2xl border-2 border-yellow-400 beacon-pulse cursor-pointer">
             <Truck className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse" />
           </div>
 
@@ -132,7 +132,7 @@ export default function TrackingMap({ techProgress, activeStageIndex, onRefreshL
       {/* Bottom Map Legend */}
       <div className="absolute bottom-3 left-3 z-20 bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-xl px-3 py-1.5 flex items-center gap-3 text-[10px] font-bold text-slate-300">
         <div className="flex items-center gap-1">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-600 border border-white"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-blue-600 border border-white"></div>
           <span>Customer</span>
         </div>
         <div className="flex items-center gap-1">
@@ -140,7 +140,7 @@ export default function TrackingMap({ techProgress, activeStageIndex, onRefreshL
           <span>Service Van</span>
         </div>
         <div className="flex items-center gap-1 hidden sm:flex">
-          <div className="w-3 h-1 bg-red-500 rounded-full"></div>
+          <div className="w-3 h-1 bg-blue-500 rounded-full"></div>
           <span>Live Route</span>
         </div>
       </div>

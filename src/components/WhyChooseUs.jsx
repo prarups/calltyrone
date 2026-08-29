@@ -8,7 +8,7 @@ export default function WhyChooseUs() {
       title: "24/7/365 Emergency Dispatch",
       desc: "Rain, snow, dark night or holiday weekend — our master dispatch center operates 24 hours a day to keep American drivers safe.",
       icon: Clock,
-      color: "text-red-500"
+      color: "text-blue-500"
     },
     {
       title: "We Come Directly To You",
@@ -26,7 +26,7 @@ export default function WhyChooseUs() {
       title: "ASE Certified Technicians",
       desc: "Experienced, background-checked master roadside mechanics trained in luxury vehicles, commercial trucks, and EV high-voltage safety.",
       icon: Award,
-      color: "text-blue-500"
+      color: "text-blue-400"
     },
     {
       title: "All Makes, Models & EVs",
@@ -38,7 +38,7 @@ export default function WhyChooseUs() {
       title: "100% Satisfaction Guarantee",
       desc: "Every tire patch, replacement, and torque spec check is backed by our nationwide service warranty and 5-star customer promise.",
       icon: ShieldCheck,
-      color: "text-red-500"
+      color: "text-blue-500"
     }
   ];
 
@@ -59,12 +59,12 @@ export default function WhyChooseUs() {
         
         {/* Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
             <span>Built On Speed & Safety</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            WHY DRIVERS CHOOSE <span className="text-red-500">MOBILE TIRE PLUS</span>
+            WHY DRIVERS CHOOSE <span className="text-blue-500">MOBILE TIRE PLUS</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
@@ -77,7 +77,7 @@ export default function WhyChooseUs() {
           {reasons.map((reason, idx) => {
             const Icon = reason.icon;
             return (
-              <div key={idx} className="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-red-500/40 transition-all space-y-4">
+              <div key={idx} className="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-blue-500/40 transition-all space-y-4">
                 <div className={`w-12 h-12 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center ${reason.color}`}>
                   <Icon className="w-6 h-6" />
                 </div>

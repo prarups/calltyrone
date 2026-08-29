@@ -25,7 +25,7 @@ export default function App() {
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isDownloadGuideOpen, setIsDownloadGuideOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
-  
+
   const [activeRequest, setActiveRequest] = useState({
     id: 'MTP-28491',
     customerName: 'David Miller',
@@ -91,7 +91,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-red-500 selection:text-white relative">
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-blue-600 selection:text-white relative">
       
       {/* Top Emergency Dispatch Bar */}
       <EmergencyBar />

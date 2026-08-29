@@ -94,7 +94,7 @@ KEEP THIS GUIDE IN YOUR GLOVEBOX FOR 24/7 ROADSIDE RELIEF
         </button>
 
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-red-600/20 text-red-400 rounded-xl border border-red-500/30">
+          <div className="p-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-500/30">
             <FileText className="w-7 h-7" />
           </div>
           <div>
@@ -111,19 +111,19 @@ KEEP THIS GUIDE IN YOUR GLOVEBOX FOR 24/7 ROADSIDE RELIEF
           <p className="font-bold text-white">Included In This Guide:</p>
           <ul className="space-y-1 text-slate-400">
             <li className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-500" />
               <span>Step-by-step highway breakdown safety protocol</span>
             </li>
             <li className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-500" />
               <span>How to read tire sidewalls & OEM speed ratings</span>
             </li>
             <li className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-500" />
               <span>Direct priority dispatch telephone hotlines</span>
             </li>
             <li className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-red-500" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-500" />
               <span>EV jacking points & high-voltage safety instructions</span>
             </li>
           </ul>
@@ -143,7 +143,7 @@ KEEP THIS GUIDE IN YOUR GLOVEBOX FOR 24/7 ROADSIDE RELIEF
           <button
             onClick={handleDownload}
             disabled={isDownloading}
-            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg shadow-red-900/50"
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs py-4 rounded-xl uppercase tracking-wider shadow-lg shadow-blue-900/50"
           >
             {isDownloading ? (
               <span>GENERATING DOCUMENT...</span>

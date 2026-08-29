@@ -45,16 +45,16 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
             onClick={() => handleLinkClick('home')}
             className="flex items-center gap-3 group text-left focus:outline-none shrink-0"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-red-600 via-red-700 to-amber-700 text-white shadow-lg shadow-red-900/40 group-hover:scale-105 transition-transform">
+            <div className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-amber-500 text-white shadow-lg shadow-blue-900/40 group-hover:scale-105 transition-transform">
               <Disc className="w-6 h-6 animate-spin-slow text-yellow-300" />
               <div className="absolute inset-0 rounded-xl border border-white/20"></div>
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
                 <span className="font-heading font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-none">
-                  CALL <span className="text-red-500">TYRONE</span>
+                  CALL <span className="text-blue-500">TYRONE</span>
                 </span>
-                <span className="bg-red-600/30 border border-red-500/50 text-red-400 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">
+                <span className="bg-blue-600/30 border border-blue-500/50 text-blue-400 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">
                   24/7
                 </span>
               </div>
@@ -70,9 +70,9 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
               <button
                 key={link.id}
                 onClick={() => handleLinkClick(link.id)}
-                className={`text-xs font-bold uppercase tracking-wider transition-all hover:text-red-400 py-1 ${
+                className={`text-xs font-bold uppercase tracking-wider transition-all hover:text-blue-400 py-1 ${
                   activeSection === link.id
-                    ? 'text-red-500 font-black border-b-2 border-red-500'
+                    ? 'text-blue-500 font-black border-b-2 border-blue-500'
                     : 'text-slate-300'
                 }`}
               >
@@ -100,16 +100,16 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
             {/* Direct Call Button */}
             <a
               href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 px-3.5 py-2 rounded-xl text-xs font-black transition-all hover:border-red-500/50 shadow-md"
+              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 px-3.5 py-2 rounded-xl text-xs font-black transition-all hover:border-blue-500/50 shadow-md"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-red-500" />
+              <PhoneCall className="w-3.5 h-3.5 text-blue-500" />
               <span>{BUSINESS_CONFIG.phone}</span>
             </a>
 
             {/* Request Service CTA */}
             <button
               onClick={onRequestService}
-              className="flex items-center gap-2 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg shadow-red-900/50 hover:shadow-red-600/40 transition-all transform active:scale-95"
+              className="flex items-center gap-2 bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg shadow-blue-900/50 hover:shadow-blue-600/40 transition-all transform active:scale-95"
             >
               <Navigation className="w-3.5 h-3.5" />
               <span>Request Tech</span>
@@ -131,7 +131,7 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
               className="p-2 text-slate-200 hover:text-white bg-slate-900 rounded-lg border border-slate-800 focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-red-500" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-blue-500" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
 
@@ -147,7 +147,7 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
               <button
                 key={link.id}
                 onClick={() => handleLinkClick(link.id)}
-                className="flex items-center justify-between py-2.5 px-3 text-left text-xs font-bold uppercase tracking-wider text-slate-200 hover:bg-slate-900 rounded-xl hover:text-red-400 transition-colors border border-transparent hover:border-slate-800"
+                className="flex items-center justify-between py-2.5 px-3 text-left text-xs font-bold uppercase tracking-wider text-slate-200 hover:bg-slate-900 rounded-xl hover:text-blue-400 transition-colors border border-transparent hover:border-slate-800"
               >
                 <span>{link.name}</span>
                 <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
@@ -171,7 +171,7 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
               href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
               className="w-full flex items-center justify-center gap-2 bg-slate-900 border border-slate-700 text-white py-3 rounded-xl font-black text-xs uppercase tracking-wider"
             >
-              <PhoneCall className="w-4 h-4 text-red-500" />
+              <PhoneCall className="w-4 h-4 text-blue-500" />
               <span>Call Emergency Hotline ({BUSINESS_CONFIG.phone})</span>
             </a>
 
@@ -180,7 +180,7 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
                 setMobileMenuOpen(false);
                 onRequestService();
               }}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-xl shadow-red-900/50"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-xl shadow-blue-900/50"
             >
               <Navigation className="w-4 h-4" />
               <span>Request Roadside Assistance Now</span>

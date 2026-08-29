@@ -28,9 +28,9 @@ export default function About() {
             </div>
 
             {/* Overlapping Fleet Badge */}
-            <div className="absolute -bottom-6 -right-2 sm:right-6 z-20 glass-panel p-4 rounded-2xl border border-red-500/40 shadow-2xl max-w-xs space-y-2">
+            <div className="absolute -bottom-6 -right-2 sm:right-6 z-20 glass-panel p-4 rounded-2xl border border-blue-500/40 shadow-2xl max-w-xs space-y-2">
               <div className="flex items-center gap-2">
-                <div className="p-2 bg-red-600 rounded-lg text-white">
+                <div className="p-2 bg-blue-600 rounded-lg text-white">
                   <Truck className="w-5 h-5" />
                 </div>
                 <div>
@@ -43,13 +43,13 @@ export default function About() {
 
           {/* Right Column Text Story */}
           <div className="lg:col-span-6 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+            <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
               <span>America's Premier Mobile Tire Service</span>
             </div>
 
             <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
               REDEFINING ROADSIDE <br />
-              <span className="text-red-500">ASSISTANCE ACROSS AMERICA</span>
+              <span className="text-blue-500">ASSISTANCE ACROSS AMERICA</span>
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
@@ -62,15 +62,15 @@ export default function About() {
 
             <div className="space-y-2 pt-2 text-xs sm:text-sm font-semibold text-slate-200">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500" />
+                <CheckCircle2 className="w-4 h-4 text-blue-500" />
                 <span>Fully Licensed, Insured & Highway Safety Certified</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500" />
+                <CheckCircle2 className="w-4 h-4 text-blue-500" />
                 <span>State-of-the-Art Mobile Balancing & Touchless Tire Mounting</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500" />
+                <CheckCircle2 className="w-4 h-4 text-blue-500" />
                 <span>Transparent Upfront Flat Rates — No Surprises</span>
               </div>
             </div>

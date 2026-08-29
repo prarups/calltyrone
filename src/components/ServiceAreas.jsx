@@ -52,13 +52,13 @@ export default function ServiceAreas({ onRequestService }) {
         
         {/* Section Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
             <MapPin className="w-3.5 h-3.5" />
             <span>50+ Mile Metro Service Radius</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            USA SERVICE AREAS & <span className="text-red-500">COVERAGE ZONES</span>
+            USA SERVICE AREAS & <span className="text-blue-500">COVERAGE ZONES</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
@@ -86,12 +86,12 @@ export default function ServiceAreas({ onRequestService }) {
                 value={zipInput}
                 onChange={(e) => setZipInput(e.target.value)}
                 placeholder="Enter 5-digit ZIP code (e.g. 75001 or 90210)"
-                className="w-full bg-slate-950 border border-slate-800 focus:border-red-500 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder-slate-500 outline-none"
+                className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder-slate-500 outline-none"
               />
             </div>
             <button
               type="submit"
-              className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs px-8 py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-md shrink-0"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs px-8 py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-md shrink-0"
             >
               Verify ZIP Coverage
             </button>
@@ -119,7 +119,7 @@ export default function ServiceAreas({ onRequestService }) {
               <div className="pt-2 pl-7">
                 <button
                   onClick={onRequestService}
-                  className="bg-red-600 text-white font-bold text-xs px-4 py-2 rounded-lg uppercase tracking-wider"
+                  className="bg-blue-600 text-white font-bold text-xs px-4 py-2 rounded-lg uppercase tracking-wider"
                 >
                   Request Dispatch For This ZIP
                 </button>
@@ -131,10 +131,10 @@ export default function ServiceAreas({ onRequestService }) {
         {/* Coverage Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {BUSINESS_CONFIG.serviceAreas.map((area, idx) => (
-            <div key={idx} className="glass-panel p-5 rounded-2xl border border-slate-800 hover:border-red-500/40 transition-all space-y-3">
+            <div key={idx} className="glass-panel p-5 rounded-2xl border border-slate-800 hover:border-blue-500/40 transition-all space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="font-heading font-bold text-lg text-white">{area.name}</h4>
-                <span className="bg-red-600/20 text-red-400 border border-red-500/30 text-[10px] font-black px-2 py-0.5 rounded uppercase">
+                <span className="bg-blue-600/20 text-blue-400 border border-blue-500/30 text-[10px] font-black px-2 py-0.5 rounded uppercase">
                   {area.state}
                 </span>
               </div>

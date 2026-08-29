@@ -32,13 +32,13 @@ export default function Testimonials() {
         
         {/* Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
-            <Star className="w-3.5 h-3.5 fill-red-400" />
+          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             <span>14,850+ Verified 5-Star Reviews</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            WHAT DRIVERS SAY ABOUT <span className="text-red-500">MOBILE TIRE PLUS</span>
+            WHAT DRIVERS SAY ABOUT <span className="text-blue-500">MOBILE TIRE PLUS</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
@@ -50,7 +50,7 @@ export default function Testimonials() {
         <div className="max-w-4xl mx-auto relative">
           
           <div className="glass-panel p-6 sm:p-10 rounded-2xl border border-slate-800 shadow-2xl relative space-y-6">
-            <Quote className="w-12 h-12 text-red-500/20 absolute top-6 right-6 pointer-events-none" />
+            <Quote className="w-12 h-12 text-blue-500/20 absolute top-6 right-6 pointer-events-none" />
 
             {/* Rating Stars */}
             <div className="flex items-center gap-1.5">
@@ -73,7 +73,7 @@ export default function Testimonials() {
                 <img
                   src={reviews[currentIndex].avatar}
                   alt={reviews[currentIndex].name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-red-500/60 shadow"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-blue-500/60 shadow"
                 />
                 <div>
                   <h4 className="font-heading font-bold text-white text-base flex items-center gap-1.5">
@@ -100,7 +100,7 @@ export default function Testimonials() {
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={`w-3 h-3 rounded-full transition-all ${
-                    idx === currentIndex ? 'bg-red-500 w-8' : 'bg-slate-800 hover:bg-slate-700'
+                    idx === currentIndex ? 'bg-blue-500 w-8' : 'bg-slate-800 hover:bg-slate-700'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />

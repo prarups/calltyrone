@@ -72,10 +72,10 @@ export default function Hero({ onRequestService, onOpenTracking }) {
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* Live Dispatch Pill */}
-            <div className="inline-flex items-center gap-2 bg-slate-950/90 border border-red-500/60 rounded-full px-4 py-1.5 backdrop-blur-md shadow-2xl">
+            <div className="inline-flex items-center gap-2 bg-slate-950/90 border border-blue-500/60 rounded-full px-4 py-1.5 backdrop-blur-md shadow-2xl">
               <span className="relative flex h-2.5 w-2.5 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
               </span>
               <span className="text-xs font-black uppercase tracking-wider text-slate-100">
                 24/7 Mobile Dispatch Active In Your Area
@@ -85,32 +85,32 @@ export default function Hero({ onRequestService, onOpenTracking }) {
             {/* Main Headline with Drop Shadow */}
             <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white uppercase leading-[1.05] drop-shadow-2xl">
               24/7 MOBILE TIRE & <br />
-              <span className="bg-gradient-to-r from-red-500 via-red-400 to-amber-400 bg-clip-text text-transparent drop-shadow-lg">
+              <span className="bg-gradient-to-r from-blue-500 via-indigo-400 to-amber-400 bg-clip-text text-transparent drop-shadow-lg">
                 ROADSIDE ASSISTANCE
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-slate-200 max-w-2xl font-medium leading-relaxed drop-shadow-md">
-              Stranded on the highway, at home, or at work? <strong className="text-white font-bold underline decoration-red-500/60">Mobile Tire Plus</strong> comes directly to your location with certified technicians, brand new tires, computerized balancers, and commercial jump packs.
+              Stranded on the highway, at home, or at work? <strong className="text-white font-bold underline decoration-blue-500/60">Mobile Tire Plus</strong> comes directly to your location with certified technicians, brand new tires, computerized balancers, and commercial jump packs.
             </p>
 
             {/* Feature Checkmarks */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-bold text-slate-100 pt-1 drop-shadow">
               <div className="flex items-center gap-2 bg-slate-950/60 px-3 py-1.5 rounded-lg border border-slate-800/80 backdrop-blur-sm">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>15-30 Min Average Arrival</span>
               </div>
               <div className="flex items-center gap-2 bg-slate-950/60 px-3 py-1.5 rounded-lg border border-slate-800/80 backdrop-blur-sm">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>No Tow Truck Required</span>
               </div>
               <div className="flex items-center gap-2 bg-slate-950/60 px-3 py-1.5 rounded-lg border border-slate-800/80 backdrop-blur-sm">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>On-Site Mounting & Patching</span>
               </div>
               <div className="flex items-center gap-2 bg-slate-950/60 px-3 py-1.5 rounded-lg border border-slate-800/80 backdrop-blur-sm">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>Real-Time Driver GPS Tracking</span>
               </div>
             </div>
@@ -121,19 +121,19 @@ export default function Hero({ onRequestService, onOpenTracking }) {
               {/* Primary Request Button */}
               <button
                 onClick={onRequestService}
-                className="flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 via-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-sm sm:text-base px-8 py-4 rounded-xl shadow-2xl shadow-red-950 hover:shadow-red-600/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 uppercase tracking-wide group"
+                className="flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm sm:text-base px-8 py-4 rounded-xl shadow-2xl shadow-blue-950 hover:shadow-blue-600/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 uppercase tracking-wide group"
               >
                 <Navigation className="w-5 h-5 group-hover:rotate-12 transition-transform shrink-0" />
                 <span>Request Roadside Service</span>
-                <ArrowRight className="w-5 h-5 text-red-200 group-hover:translate-x-1 transition-transform shrink-0" />
+                <ArrowRight className="w-5 h-5 text-blue-200 group-hover:translate-x-1 transition-transform shrink-0" />
               </button>
 
               {/* Secondary Call Button */}
               <a
                 href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-                className="flex items-center justify-center gap-3 bg-slate-950/90 hover:bg-slate-900 border border-slate-700 text-white font-black text-sm sm:text-base px-7 py-4 rounded-xl shadow-xl transition-all hover:border-red-500/60 group backdrop-blur-md"
+                className="flex items-center justify-center gap-3 bg-slate-950/90 hover:bg-slate-900 border border-slate-700 text-white font-black text-sm sm:text-base px-7 py-4 rounded-xl shadow-xl transition-all hover:border-blue-500/60 group backdrop-blur-md"
               >
-                <PhoneCall className="w-5 h-5 text-red-500 group-hover:scale-110 transition-transform shrink-0" />
+                <PhoneCall className="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform shrink-0" />
                 <span>Call {BUSINESS_CONFIG.phone}</span>
               </a>
 
@@ -165,7 +165,7 @@ export default function Hero({ onRequestService, onOpenTracking }) {
                       key={idx}
                       onClick={() => setCurrentSlide(idx)}
                       className={`h-2 rounded-full transition-all ${
-                        idx === currentSlide ? 'w-6 bg-red-500' : 'w-2 bg-slate-700 hover:bg-slate-500'
+                        idx === currentSlide ? 'w-6 bg-blue-500' : 'w-2 bg-slate-700 hover:bg-slate-500'
                       }`}
                       title={`Go to background slide ${idx + 1}`}
                     />
@@ -197,12 +197,12 @@ export default function Hero({ onRequestService, onOpenTracking }) {
           {/* Right Column: Key Trust Card & Quick Status Box */}
           <div className="lg:col-span-5">
             <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-2xl relative space-y-5">
-              <div className="inline-block bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md mb-1">
+              <div className="inline-block bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md mb-1">
                 100% Mobile On-Site Service
               </div>
 
               <h3 className="font-heading text-2xl font-black text-white flex items-center gap-2 uppercase tracking-wide">
-                <ShieldCheck className="w-6 h-6 text-red-500 shrink-0" />
+                <ShieldCheck className="w-6 h-6 text-blue-500 shrink-0" />
                 Why American Drivers Trust Us
               </h3>
 
@@ -210,7 +210,7 @@ export default function Hero({ onRequestService, onOpenTracking }) {
                 
                 {/* Metric 1 */}
                 <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-950/90 border border-slate-800/80">
-                  <div className="p-2.5 rounded-xl bg-red-500/10 text-red-400 shrink-0">
+                  <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400 shrink-0">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>

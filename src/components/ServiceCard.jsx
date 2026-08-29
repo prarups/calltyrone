@@ -26,7 +26,7 @@ export default function ServiceCard({ service, onSelectService }) {
   };
 
   return (
-    <div className="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-red-500/50 transition-all duration-300 group flex flex-col justify-between hover:shadow-2xl hover:shadow-red-950/30">
+    <div className="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-blue-500/50 transition-all duration-300 group flex flex-col justify-between hover:shadow-2xl hover:shadow-blue-950/30">
       
       {/* Service Image with overlay badges */}
       <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-950">
@@ -41,7 +41,7 @@ export default function ServiceCard({ service, onSelectService }) {
 
         {/* Popular Badge */}
         {service.popular && (
-          <div className="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md shadow-lg">
+          <div className="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md shadow-lg">
             High Demand
           </div>
         )}
@@ -53,7 +53,7 @@ export default function ServiceCard({ service, onSelectService }) {
         </div>
 
         {/* Icon Floating Badge */}
-        <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-slate-950/90 backdrop-blur-md border border-slate-700 text-red-500 flex items-center justify-center shadow-lg group-hover:bg-red-600 group-hover:text-white transition-colors">
+        <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-slate-950/90 backdrop-blur-md border border-slate-700 text-blue-500 flex items-center justify-center shadow-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
           <IconComponent className="w-5 h-5" />
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function ServiceCard({ service, onSelectService }) {
         
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="font-heading text-xl font-bold text-white group-hover:text-red-400 transition-colors">
+            <h3 className="font-heading text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
               {service.title}
             </h3>
             <span className="text-amber-400 font-heading font-black text-lg">
@@ -79,7 +79,7 @@ export default function ServiceCard({ service, onSelectService }) {
           <ul className="space-y-1.5 pt-2 text-xs text-slate-300">
             {service.features.map((feat, idx) => (
               <li key={idx} className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-red-500 shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />
                 <span>{feat}</span>
               </li>
             ))}
@@ -90,10 +90,10 @@ export default function ServiceCard({ service, onSelectService }) {
         <div className="pt-4 border-t border-slate-800/80">
           <button
             onClick={() => onSelectService(service.id)}
-            className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 text-slate-200 hover:text-white border border-slate-800 hover:border-red-500 text-xs font-extrabold uppercase tracking-wider py-3 rounded-xl transition-all shadow-md group-hover:shadow-red-900/40"
+            className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-600 text-slate-200 hover:text-white border border-slate-800 hover:border-blue-500 text-xs font-extrabold uppercase tracking-wider py-3 rounded-xl transition-all shadow-md group-hover:shadow-blue-900/40"
           >
             <span>Get Help Now</span>
-            <ArrowRight className="w-4 h-4 text-red-500 group-hover:text-white group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-blue-500 group-hover:text-white group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 

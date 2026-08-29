@@ -29,13 +29,13 @@ export default function FAQ() {
         
         {/* Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Roadside Help Center</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            FREQUENTLY ASKED <span className="text-red-500">QUESTIONS</span>
+            FREQUENTLY ASKED <span className="text-blue-500">QUESTIONS</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
@@ -50,7 +50,7 @@ export default function FAQ() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search emergency questions (e.g. ETA, payment, EV, spare)..."
-              className="w-full bg-slate-950 border border-slate-800 focus:border-red-500 rounded-xl pl-10 pr-4 py-3 text-xs text-white placeholder-slate-500 outline-none shadow-xl"
+              className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl pl-10 pr-4 py-3 text-xs text-white placeholder-slate-500 outline-none shadow-xl"
             />
           </div>
         </div>
@@ -64,10 +64,10 @@ export default function FAQ() {
                 <div key={idx} className="glass-panel rounded-2xl border border-slate-800 overflow-hidden transition-all">
                   <button
                     onClick={() => setOpenIndex(isOpen ? -1 : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-heading text-base sm:text-lg font-bold text-white hover:text-red-400 transition-colors"
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-heading text-base sm:text-lg font-bold text-white hover:text-blue-400 transition-colors"
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown className={`w-5 h-5 text-red-500 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-5 h-5 text-blue-500 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
 
                   {isOpen && (

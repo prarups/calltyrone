@@ -8,12 +8,12 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Top Emergency CTA Strip inside Footer */}
-        <div className="bg-gradient-to-r from-red-700 via-red-600 to-amber-600 rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div className="bg-gradient-to-r from-blue-700 via-indigo-600 to-amber-600 rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
           <div className="space-y-1 text-center md:text-left">
             <h3 className="font-heading text-2xl sm:text-3xl font-black uppercase tracking-tight">
               STRANDED ON THE ROAD? CALL TYRONE NOW!
             </h3>
-            <p className="text-xs sm:text-sm text-red-100 font-medium">
+            <p className="text-xs sm:text-sm text-blue-100 font-medium">
               24/7 Mobile Tire Change, Flat Repair, Battery Jump-Start & Lockout Assistance across major USA cities.
             </p>
           </div>
@@ -42,11 +42,11 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
           {/* Col 1: Brand & Tagline */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-amber-600 text-white flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-amber-500 text-white flex items-center justify-center font-bold">
                 <Disc className="w-6 h-6 animate-spin-slow text-yellow-300" />
               </div>
               <span className="font-heading font-black text-xl text-white uppercase tracking-tight">
-                CALL <span className="text-red-500">TYRONE</span>
+                CALL <span className="text-blue-500">TYRONE</span>
               </span>
             </div>
 
@@ -56,7 +56,7 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
 
             <div className="pt-2 space-y-1">
               <p className="text-slate-300 font-bold flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-red-500" />
+                <MapPin className="w-3.5 h-3.5 text-blue-500" />
                 <span>{BUSINESS_CONFIG.address.fullAddress}</span>
               </p>
               <p className="text-slate-400">Dispatch Email: {BUSINESS_CONFIG.email}</p>
@@ -67,11 +67,11 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
           <div className="space-y-3">
             <h4 className="font-heading text-sm font-bold text-white uppercase tracking-wider">Tire Services</h4>
             <ul className="space-y-2 text-slate-400">
-              <li><a href="#services" className="hover:text-red-400">Mobile Tire Change</a></li>
-              <li><a href="#services" className="hover:text-red-400">Flat Tire Patch & Repair</a></li>
-              <li><a href="#services" className="hover:text-red-400">On-Site Tire Replacement</a></li>
-              <li><a href="#services" className="hover:text-red-400">Emergency Tire Delivery</a></li>
-              <li><a href="#services" className="hover:text-red-400">TPMS Sensor Recalibration</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Mobile Tire Change</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Flat Tire Patch & Repair</a></li>
+              <li><a href="#services" className="hover:text-blue-400">On-Site Tire Replacement</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Emergency Tire Delivery</a></li>
+              <li><a href="#services" className="hover:text-blue-400">TPMS Sensor Recalibration</a></li>
             </ul>
           </div>
 
@@ -79,11 +79,11 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
           <div className="space-y-3">
             <h4 className="font-heading text-sm font-bold text-white uppercase tracking-wider">Roadside & Battery</h4>
             <ul className="space-y-2 text-slate-400">
-              <li><a href="#services" className="hover:text-red-400">Battery Jump-Start (12V/24V)</a></li>
-              <li><a href="#services" className="hover:text-red-400">Mobile Battery Replacement</a></li>
-              <li><a href="#services" className="hover:text-red-400">Damage-Free Lockout Entry</a></li>
-              <li><a href="#services" className="hover:text-red-400">Fuel & Diesel Delivery</a></li>
-              <li><a href="#services" className="hover:text-red-400">Flatbed Towing & Recovery</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Battery Jump-Start (12V/24V)</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Mobile Battery Replacement</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Damage-Free Lockout Entry</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Fuel & Diesel Delivery</a></li>
+              <li><a href="#services" className="hover:text-blue-400">Flatbed Towing & Recovery</a></li>
             </ul>
           </div>
 
@@ -92,11 +92,11 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
             <h4 className="font-heading text-sm font-bold text-white uppercase tracking-wider">Quick Navigation</h4>
             <ul className="space-y-2 text-slate-400">
               <li><button onClick={onOpenTracking} className="hover:text-amber-400 font-bold text-amber-500">📍 Real-Time Service Tracking</button></li>
-              <li><button onClick={onOpenDownloadGuide} className="hover:text-red-400 text-left">📄 Download Emergency Guide</button></li>
-              <li><a href="#service-areas" className="hover:text-red-400">USA Service Areas</a></li>
-              <li><a href="#pricing" className="hover:text-red-400">Pricing & Estimates</a></li>
-              <li><a href="#reviews" className="hover:text-red-400">Customer Testimonials</a></li>
-              <li><a href="#faq" className="hover:text-red-400">Roadside FAQ</a></li>
+              <li><button onClick={onOpenDownloadGuide} className="hover:text-blue-400 text-left">📄 Download Emergency Guide</button></li>
+              <li><a href="#service-areas" className="hover:text-blue-400">USA Service Areas</a></li>
+              <li><a href="#pricing" className="hover:text-blue-400">Pricing & Estimates</a></li>
+              <li><a href="#reviews" className="hover:text-blue-400">Customer Testimonials</a></li>
+              <li><a href="#faq" className="hover:text-blue-400">Roadside FAQ</a></li>
             </ul>
           </div>
 

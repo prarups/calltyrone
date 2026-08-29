@@ -31,13 +31,13 @@ export default function Services({ onSelectService }) {
         
         {/* Section Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
             <Wrench className="w-3.5 h-3.5" />
             <span>24/7 Mobile Service Catalog</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-lg">
-            COMPREHENSIVE <span className="text-red-500">ROADSIDE SERVICES</span>
+            COMPREHENSIVE <span className="text-blue-500">ROADSIDE SERVICES</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto font-normal">
@@ -50,7 +50,7 @@ export default function Services({ onSelectService }) {
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border ${
                 filter === 'all' 
-                  ? 'bg-red-600 text-white border-red-500 shadow-md shadow-red-900/40' 
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
                   : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
               }`}
             >
@@ -61,7 +61,7 @@ export default function Services({ onSelectService }) {
               onClick={() => setFilter('tires')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border ${
                 filter === 'tires' 
-                  ? 'bg-red-600 text-white border-red-500 shadow-md shadow-red-900/40' 
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
                   : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
               }`}
             >
@@ -73,7 +73,7 @@ export default function Services({ onSelectService }) {
               onClick={() => setFilter('battery_lockout')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border ${
                 filter === 'battery_lockout' 
-                  ? 'bg-red-600 text-white border-red-500 shadow-md shadow-red-900/40' 
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
                   : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
               }`}
             >
@@ -85,7 +85,7 @@ export default function Services({ onSelectService }) {
               onClick={() => setFilter('towing_fuel')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border ${
                 filter === 'towing_fuel' 
-                  ? 'bg-red-600 text-white border-red-500 shadow-md shadow-red-900/40' 
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
                   : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
               }`}
             >
@@ -110,7 +110,7 @@ export default function Services({ onSelectService }) {
         {/* Bottom Banner Note */}
         <div className="glass-panel p-6 rounded-2xl border border-slate-800 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-left">
-            <div className="p-3 bg-red-600/20 text-red-400 rounded-xl border border-red-500/30">
+            <div className="p-3 bg-blue-600/20 text-blue-400 rounded-xl border border-blue-500/30">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -120,7 +120,7 @@ export default function Services({ onSelectService }) {
           </div>
           <a
             href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-            className="bg-red-600 hover:bg-red-700 text-white text-xs font-black uppercase tracking-wider px-6 py-3 rounded-xl shrink-0 transition-all shadow-md"
+            className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-wider px-6 py-3 rounded-xl shrink-0 transition-all shadow-md"
           >
             Call Dispatch Custom Unit
           </a>
