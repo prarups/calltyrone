@@ -6,11 +6,10 @@ export const BUSINESS_CONFIG = {
   logo: "/images/logo.png",
   tagline: "24/7 Mobile Tire & Roadside Assistance — 50-Mile Atlanta Radius",
   shortDescription: "America's trusted 24/7 mobile tire change, flat repair, battery jump-start, lockout & emergency roadside assistance service across Greater Atlanta and all surrounding areas within a 50-mile radius. Call Tyrone LLC for rapid dispatch.",
-  phone: "+91 63831 52819",
-  phoneRaw: "+916383152819",
-  altPhone: "+91 63831 52819",
-  indiaTestPhone: "+91 6383152819",
-  whatsappPhoneRaw: "916383152819", // Direct WhatsApp target for receiving dispatches!
+  phone: "(404) 482-2246",
+  phoneRaw: "+14044822246",
+  altPhone: "(404) 482-2246",
+  whatsappPhoneRaw: "14044822246", // Client USA WhatsApp target (404) 482-2246
   email: "info@mobiletireplus.com",
   supportEmail: "info@mobiletireplus.com",
   website: "https://calltyrone.com",
@@ -270,7 +269,7 @@ export const BUSINESS_CONFIG = {
       rating: 5,
       date: "5 days ago",
       service: "Lockout Service",
-      comment: "Accidentally locked my keys and purse in the car late at night. Called Call Tyrone LLC emergency hotline at +91 63831 52819 and tech Alex unlocked the car in 2 minutes without a single scratch. Highly recommended!",
+      comment: "Accidentally locked my keys and purse in the car late at night. Called Call Tyrone LLC emergency hotline at (404) 482-2246 and tech Alex unlocked the car in 2 minutes without a single scratch. Highly recommended!",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
     }
   ],
@@ -306,7 +305,7 @@ export const BUSINESS_CONFIG = {
     },
     {
       q: "What information do I need to request service?",
-      a: "You simply need your current location/address, vehicle Year/Make/Model, phone number (+91 63831 52819 for quick callback), and service needed."
+      a: "You simply need your current location/address, vehicle Year/Make/Model, phone number (404-482-2246 for quick callback), and service needed."
     }
   ],
 
@@ -315,7 +314,7 @@ export const BUSINESS_CONFIG = {
     role: "Lead Master Roadside Technician",
     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",
     rating: "4.98 ★ (1,420+ Services Completed)",
-    phone: "+91 63831 52819",
+    phone: "(404) 482-2246",
     unit: "Call Tyrone LLC Unit #408",
     vehicle: "2024 Ford Transit High-Roof Custom Service Van",
     licensePlate: "GA-TYR408",
