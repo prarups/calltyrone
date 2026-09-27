@@ -49,7 +49,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
 
   const handleDetectLocation = () => {
     if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser");
+      alert("Geolocation is not supported by your browser. Please type your breakdown location manually.");
       return;
     }
 
@@ -58,32 +58,33 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
-        const mapsUrl = `https://maps.google.com/?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+        const liveMapsUrl = `https://maps.google.com/?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
 
         try {
           const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
+            { headers: { 'Accept-Language': 'en' } }
           );
           if (response.ok) {
             const data = await response.json();
-            const address = data.display_name || `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+            const address = data.display_name || `GPS (${latitude.toFixed(5)}, ${longitude.toFixed(5)})`;
             setFormData(prev => ({ 
               ...prev, 
               location: address,
-              locationUrl: mapsUrl 
+              locationUrl: liveMapsUrl 
             }));
           } else {
             setFormData(prev => ({
               ...prev,
-              location: `GPS: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
-              locationUrl: mapsUrl
+              location: `GPS (${latitude.toFixed(5)}, ${longitude.toFixed(5)})`,
+              locationUrl: liveMapsUrl
             }));
           }
         } catch (err) {
           setFormData(prev => ({
             ...prev,
-            location: `GPS: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
-            locationUrl: mapsUrl
+            location: `GPS (${latitude.toFixed(5)}, ${longitude.toFixed(5)})`,
+            locationUrl: liveMapsUrl
           }));
         } finally {
           setIsLocating(false);
@@ -91,14 +92,18 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
       },
       (error) => {
         console.warn("Geolocation permission error or timeout:", error);
-        setFormData(prev => ({
-          ...prev,
-          location: 'Atlanta, GA (Current Location)',
-          locationUrl: 'https://maps.google.com/?q=Atlanta,GA'
-        }));
+        let errorMsg = "Could not fetch GPS location automatically.";
+        if (error.code === 1) {
+          errorMsg = "Location permission denied by browser. Please allow location access or type your address manually.";
+        } else if (error.code === 2) {
+          errorMsg = "GPS signal unavailable. Please type your location manually.";
+        } else if (error.code === 3) {
+          errorMsg = "GPS request timed out. Please try tapping GPS Detect again or type manually.";
+        }
+        alert(errorMsg);
         setIsLocating(false);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
     );
   };
 
@@ -108,14 +113,17 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
 
     const selectedServiceObj = BUSINESS_CONFIG.services.find(s => s.id === formData.serviceId);
     const serviceTitle = selectedServiceObj ? selectedServiceObj.title : 'Roadside Assistance';
-    const mapsUrl = formData.locationUrl || `https://maps.google.com/?q=${encodeURIComponent(formData.location)}`;
+    
+    // Build real Google Maps URL from user input or GPS coordinates
+    const userLocation = formData.location.trim();
+    const mapsUrl = formData.locationUrl || `https://maps.google.com/?q=${encodeURIComponent(userLocation)}`;
 
     const waMessage = 
 `🚨 *CALL TYRONE 24/7 SERVICE REQUEST*
 ---------------------------------------
 👤 *Name:* ${formData.fullName}
 📞 *Phone:* ${formData.phone}
-📍 *Location:* ${formData.location}
+📍 *Location:* ${userLocation}
 🗺️ *Live Maps Link:* ${mapsUrl}
 🔧 *Service:* ${serviceTitle}
 🚗 *Vehicle:* ${formData.vehicleMakeModel}
