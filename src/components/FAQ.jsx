@@ -80,7 +80,7 @@ export default function FAQ() {
             })
           ) : (
             <div className="text-center py-8 text-slate-400 text-sm">
-              No matching questions found. Call our 24/7 hotline at 1-800-555-8473.
+              No matching questions found. Call our 24/7 hotline at {BUSINESS_CONFIG.phone}.
             </div>
           )}
         </div>

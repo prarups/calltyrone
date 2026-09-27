@@ -1,5 +1,5 @@
 import React from 'react';
-import { DollarSign, CheckCircle2, ArrowRight, ShieldAlert } from 'lucide-react';
+import { DollarSign, CheckCircle2, ArrowRight, ShieldAlert, Clock, MapPin } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function Pricing({ onRequestService }) {
@@ -16,7 +16,7 @@ export default function Pricing({ onRequestService }) {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/90 to-slate-900"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-10 relative z-10">
         
         {/* Header */}
         <div className="text-center space-y-3">
@@ -30,12 +30,12 @@ export default function Pricing({ onRequestService }) {
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-            No hidden call-out surprises. We provide clear estimates before dispatching a technician to your vehicle.
+            No hidden call-out surprises. We provide clear distance-based pricing & instant estimates before dispatching a technician.
           </p>
         </div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {BUSINESS_CONFIG.pricingTiers.map((tier, idx) => (
             <div key={idx} className="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-blue-500/50 transition-all flex flex-col justify-between space-y-6 relative group">
               
@@ -68,7 +68,7 @@ export default function Pricing({ onRequestService }) {
 
               <button
                 onClick={onRequestService}
-                className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-blue-600 text-slate-200 hover:text-white border border-slate-700 hover:border-blue-500 font-extrabold text-xs py-3 rounded-xl uppercase tracking-wider transition-all"
+                className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-blue-600 text-slate-200 hover:text-white border border-slate-700 hover:border-blue-500 font-extrabold text-xs py-3 rounded-xl uppercase tracking-wider transition-all cursor-pointer"
               >
                 <span>Get Instant Quote</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -78,15 +78,34 @@ export default function Pricing({ onRequestService }) {
           ))}
         </div>
 
-        {/* Pricing Disclaimer Box */}
-        <div className="glass-panel p-4 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-1 text-center max-w-4xl mx-auto">
-          <p className="font-bold text-slate-300 flex items-center justify-center gap-1.5">
-            <ShieldAlert className="w-4 h-4 text-amber-400" />
-            <span>Pricing Disclaimer & Itemization:</span>
-          </p>
-          <p>
-            * Prices shown above represent base starting rates for standard passenger cars during regular hours. Final pricing may vary based on exact vehicle make/model, OEM tire specifications, location distance from metro hubs, and late-night emergency hours. You will receive an exact quote before technician dispatch.
-          </p>
+        {/* Pricing Terms & Distance / After-Hours Fee Info Box */}
+        <div className="glass-panel p-5 rounded-2xl border border-slate-800 text-xs text-slate-300 space-y-4 max-w-4xl mx-auto shadow-xl bg-slate-950/80">
+          <div className="flex items-center gap-2 font-heading font-extrabold text-sm text-amber-400 uppercase tracking-wider border-b border-slate-800/80 pb-2.5">
+            <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>Pricing Structure & Instant Rate Policy</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div className="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 flex items-start gap-3">
+              <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block font-bold text-xs">Distance-Based Pricing Structure</strong>
+                <p className="text-slate-300 text-[11px] leading-relaxed mt-0.5">
+                  Instant price quotes are calculated using distance-based pricing (fixed service base rate + distance-based mileage).
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 flex items-start gap-3">
+              <Clock className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block font-bold text-xs">After-Hours Emergency Fee</strong>
+                <p className="text-amber-300 font-semibold text-[11px] leading-relaxed mt-0.5">
+                  After-hour fees will be added for calls between 6:00 PM and 6:00 AM.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

@@ -26,20 +26,25 @@ export default function App() {
   const [isDownloadGuideOpen, setIsDownloadGuideOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
 
-  const [activeRequest, setActiveRequest] = useState({
+  // Preset demo request data preserved in code for future re-enablement:
+  /*
+  const DEMO_PRESET_REQUEST = {
     id: 'MTP-28491',
     customerName: 'David Miller',
-    phone: '(555) 382-9102',
+    phone: '(404) 482-2246',
     location: '4800 Airport Fwy, Fort Worth, TX 76117',
     vehicle: '2022 Ford F-150 SuperCrew',
-    serviceName: 'Mobile Tire Change & Pressure Tuning',
+    serviceName: 'Flat Tire Change',
     tireSize: '275/55R20',
     timestamp: '10:42 AM',
     status: 'Technician On The Way',
     etaMinutes: 12,
     distanceMiles: 2.4,
     technician: BUSINESS_CONFIG.demoTechnician
-  });
+  };
+  */
+
+  const [activeRequest, setActiveRequest] = useState(null);
 
   const handleNavigateSection = (sectionId) => {
     setActiveSection(sectionId);
@@ -83,11 +88,10 @@ export default function App() {
   };
 
   const handleOpenTrackingView = (requestObj = null) => {
+    // Tracking page view navigation disabled per client requirement
     if (requestObj) {
       setActiveRequest(requestObj);
     }
-    setCurrentView('tracking');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -101,12 +105,13 @@ export default function App() {
         onNavigateSection={handleNavigateSection}
         onOpenTracking={() => handleOpenTrackingView()}
         onRequestService={() => handleOpenRequestForm()}
-        activeSection={currentView === 'tracking' ? 'tracking' : activeSection}
+        activeSection={activeSection}
         activeRequestId={activeRequest?.id}
       />
 
-      {/* Main Landing View vs Real-Time Tracking Page */}
-      {currentView === 'tracking' ? (
+      {/* Main Landing View (Tracking page view commented out for future use) */}
+      {/*
+      {currentView === 'tracking' && (
         <TrackingPage
           requestData={activeRequest}
           onBackToHome={() => {
@@ -114,13 +119,20 @@ export default function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         />
-      ) : (
-        <main className="space-y-0">
+      )}
+      */}
+      <main className="space-y-0">
           {/* Hero Section */}
           <Hero
             onRequestService={() => handleOpenRequestForm()}
             onOpenTracking={() => handleOpenTrackingView()}
           />
+
+          {/* Services Catalog */}
+          <Services onSelectService={handleServiceSelectedFromGrid} />
+
+          {/* Why Choose Us ("Why American Drivers Trust Us") */}
+          <WhyChooseUs />
 
           {/* Quick Service Dispatch Request Form Engine */}
           <ServiceRequestForm
@@ -129,17 +141,11 @@ export default function App() {
             onOpenTracking={handleOpenTrackingView}
           />
 
-          {/* Services Catalog */}
-          <Services onSelectService={handleServiceSelectedFromGrid} />
-
           {/* How It Works Workflow */}
           <HowItWorks onRequestService={() => handleOpenRequestForm()} />
 
           {/* Service Areas & ZIP Code Availability Checker */}
           <ServiceAreas onRequestService={() => handleOpenRequestForm()} />
-
-          {/* Why Choose Us */}
-          <WhyChooseUs />
 
           {/* About Us & Fleet Story */}
           <About />
@@ -156,7 +162,6 @@ export default function App() {
           {/* Contact & Corporate Fleet Inquiry Form */}
           <Contact onOpenDownloadGuide={() => setIsDownloadGuideOpen(true)} />
         </main>
-      )}
 
       {/* Footer */}
       <Footer
@@ -174,22 +179,16 @@ export default function App() {
 
       {/* Modal: Quick Request Form Modal */}
       {isRequestModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-          <div className="relative max-w-3xl w-full my-8">
-            <button
-              onClick={() => setIsRequestModalOpen(false)}
-              className="absolute top-4 right-4 z-10 p-2 bg-slate-900 text-slate-400 hover:text-white rounded-full border border-slate-700"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="relative max-w-xl w-full max-h-[92vh] overflow-y-auto rounded-2xl">
             <ServiceRequestForm
               preselectedService={selectedServiceId}
               onRequestSubmitted={(req) => {
                 handleRequestSubmitted(req);
-                handleOpenTrackingView(req);
               }}
-              onOpenTracking={handleOpenTrackingView}
+              onCancel={() => setIsRequestModalOpen(false)}
+              onClose={() => setIsRequestModalOpen(false)}
+              isModal={true}
             />
           </div>
         </div>

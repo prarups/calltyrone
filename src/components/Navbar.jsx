@@ -43,22 +43,42 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
           {/* Brand Logo */}
           <button
             onClick={() => handleLinkClick('home')}
-            className="flex items-center gap-3 group text-left focus:outline-none shrink-0"
+            className="flex items-center gap-3.5 group text-left focus:outline-none shrink-0 cursor-pointer"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-amber-500 text-white shadow-lg shadow-blue-900/40 group-hover:scale-105 transition-transform">
-              <Disc className="w-6 h-6 animate-spin-slow text-yellow-300" />
-              <div className="absolute inset-0 rounded-xl border border-white/20"></div>
+            {/* Circular Styled Logo Container */}
+            <div className="relative flex items-center justify-center shrink-0">
+              {/* Circular Glowing Aura */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-indigo-500 to-amber-400 rounded-full blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              {/* Circular Ring Frame */}
+              <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 via-indigo-500 to-amber-400 shadow-xl flex items-center justify-center bg-slate-950">
+                <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden p-0.5 border border-slate-800">
+                  <img 
+                    src={BUSINESS_CONFIG.logo} 
+                    alt={BUSINESS_CONFIG.name} 
+                    className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-300"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                </div>
+              </div>
+
+              {/* Live Active Status Pulse Badge */}
+              <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-slate-950"></span>
+              </span>
             </div>
+
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="font-heading font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-none">
+                <span className="font-heading font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-none group-hover:text-blue-400 transition-colors">
                   CALL <span className="text-blue-500">TYRONE</span>
                 </span>
-                <span className="bg-blue-600/30 border border-blue-500/50 text-blue-400 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider">
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white border border-blue-400/40 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
                   24/7
                 </span>
               </div>
-              <span className="text-[10px] text-slate-400 font-semibold tracking-widest uppercase mt-0.5 hidden sm:block">
+              <span className="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-0.5 hidden sm:block">
                 Mobile Tire & Roadside Dispatch
               </span>
             </div>
@@ -84,7 +104,8 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
           {/* Right Action CTAs */}
           <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             
-            {/* Live Track Service Button */}
+            {/* Live Track Service Button (Disabled as requested) */}
+            {/*
             <button
               onClick={onOpenTracking}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all border ${
@@ -96,6 +117,7 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
               <Activity className="w-3.5 h-3.5 text-amber-400" />
               <span>{activeRequestId ? `Track #${activeRequestId}` : 'Track Service'}</span>
             </button>
+            */}
 
             {/* Direct Call Button */}
             <a
@@ -118,6 +140,8 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
 
           {/* Mobile Actions Right */}
           <div className="flex items-center gap-2 xl:hidden">
+            {/* Mobile Track Button (Disabled as requested) */}
+            {/*
             <button
               onClick={onOpenTracking}
               className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-black bg-slate-900 text-amber-400 border border-amber-500/40"
@@ -125,6 +149,7 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
               <Activity className="w-3.5 h-3.5 text-amber-400" />
               <span>Track</span>
             </button>
+            */}
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -156,6 +181,8 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
           </div>
 
           <div className="flex flex-col gap-2.5 pt-1">
+            {/* Mobile Drawer Track Button (Disabled as requested) */}
+            {/*
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
@@ -166,6 +193,7 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
               <Activity className="w-4 h-4 text-amber-400" />
               <span>{activeRequestId ? `Track Active Request (#${activeRequestId})` : 'Live GPS Service Tracking'}</span>
             </button>
+            */}
 
             <a
               href={`tel:${BUSINESS_CONFIG.phoneRaw}`}

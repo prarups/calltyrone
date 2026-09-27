@@ -99,6 +99,26 @@ body {
   animation: map-pulse 2.5s ease-in-out infinite;
 }
 
+/* Continuous Marquee Animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* Grid pattern background for tracking map */
 .bg-grid-pattern {
   background-size: 40px 40px;
@@ -112,5 +132,77 @@ body {
   background-size: 24px 24px;
 }
 
+/* Smooth Image Floating & Glow Pulse Animation */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float-gentle 4.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.3), 0 0 40px rgba(37, 99, 235, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(37, 99, 235, 0.6), 0 0 60px rgba(37, 99, 235, 0.3);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3.5s ease-in-out infinite;
+}
+
+/* Continuous Rainbow Glow & Text Animations */
+@keyframes rainbow-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.rainbow-glow-border {
+  background: linear-gradient(90deg, #ff0055, #ff7700, #ffdd00, #00ff66, #00d4ff, #9900ff, #ff0055);
+  background-size: 300% 300%;
+  animation: rainbow-border 4s linear infinite;
+}
+
+.rainbow-text {
+  background: linear-gradient(90deg, #ff0077, #ffaa00, #ffee00, #00ff88, #00e5ff, #b000ff, #ff0077);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-border 4s linear infinite;
+}
+
+/* Hover & Touch Rainbow Glow Visual for Cards */
+.hover-rainbow-card {
+  position: relative;
+  transition: all 0.4s ease-out;
+  padding: 1.5px;
+  border-radius: 1rem;
+  background: transparent;
+}
+
+.hover-rainbow-card:hover,
+.hover-rainbow-card:active,
+.hover-rainbow-card:focus-within {
+  background: linear-gradient(90deg, #ff0055, #ff7700, #ffdd00, #00ff66, #00d4ff, #9900ff, #ff0055);
+  background-size: 300% 300%;
+  animation: rainbow-border 3s linear infinite;
+  box-shadow: 0 0 35px rgba(0, 212, 255, 0.4), 0 0 20px rgba(255, 0, 119, 0.3);
+  transform: translateY(-6px) scale(1.01);
+}
 
 

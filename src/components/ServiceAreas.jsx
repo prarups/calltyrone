@@ -15,12 +15,12 @@ export default function ServiceAreas({ onRequestService }) {
     const matchedZone = BUSINESS_CONFIG.serviceAreas.find(zone => zone.zipPrefixes.includes(prefix));
 
     if (matchedZone || cleanZip.length === 5) {
-      const unitsCount = matchedZone ? matchedZone.units : Math.floor(6 + Math.random() * 8);
-      const zoneName = matchedZone ? matchedZone.name : `Region ${cleanZip} Zone`;
+      const unitsCount = matchedZone ? matchedZone.units : Math.floor(8 + Math.random() * 8);
+      const zoneName = matchedZone ? matchedZone.name : `Atlanta 50-Mile Radius Zone (${cleanZip})`;
       
       setSearchResult({
         covered: true,
-        message: `YES! Mobile Tire Plus provides 24/7 service in ${zoneName} (ZIP ${cleanZip}).`,
+        message: `YES! Call Tyrone LLC provides 24/7 service in ${zoneName}.`,
         units: `${unitsCount} active mobile units currently in service area`,
         eta: "15 to 25 minutes average dispatch arrival time"
       });
@@ -29,7 +29,7 @@ export default function ServiceAreas({ onRequestService }) {
         covered: false,
         message: `ZIP code ${cleanZip} is in our extended border radius zone.`,
         units: "Mobile units available via special dispatch call",
-        eta: "Call 1-800-555-8473 to confirm immediate technician dispatch"
+        eta: `Call ${BUSINESS_CONFIG.phone} to confirm immediate technician dispatch`
       });
     }
   };
@@ -54,15 +54,15 @@ export default function ServiceAreas({ onRequestService }) {
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-xs font-black uppercase tracking-wider px-3.5 py-1 rounded-full">
             <MapPin className="w-3.5 h-3.5" />
-            <span>50+ Mile Metro Service Radius</span>
+            <span>50-Mile Atlanta Service Radius</span>
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            USA SERVICE AREAS & <span className="text-blue-500">COVERAGE ZONES</span>
+            ATLANTA METRO & <span className="text-blue-500">50-MILE RADIUS COVERAGE</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
-            We operate heavy-duty mobile service fleets across major metropolitan highway corridors and surrounding suburbs.
+            We operate heavy-duty mobile service fleets servicing Greater Atlanta and all surrounding cities within a 50-mile radius.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default function ServiceAreas({ onRequestService }) {
               Check Immediate Service Availability
             </h3>
             <p className="text-xs text-slate-400">
-              Enter your 5-digit ZIP code below for instant dispatch feasibility.
+              Enter your 5-digit Atlanta / Georgia ZIP code below for instant dispatch feasibility.
             </p>
           </div>
 
@@ -85,7 +85,7 @@ export default function ServiceAreas({ onRequestService }) {
                 maxLength={5}
                 value={zipInput}
                 onChange={(e) => setZipInput(e.target.value)}
-                placeholder="Enter 5-digit ZIP code (e.g. 75001 or 90210)"
+                placeholder="Enter 5-digit ZIP code (e.g. 30301 or 30004)"
                 className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl pl-11 pr-4 py-3.5 text-sm text-white placeholder-slate-500 outline-none"
               />
             </div>

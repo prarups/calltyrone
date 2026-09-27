@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Navigation, Car, Phone, User, Disc, Clock, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { MapPin, Navigation, Car, Phone, User, Disc, CheckCircle2, ShieldCheck, X } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
-export default function ServiceRequestForm({ preselectedService, onRequestSubmitted, onOpenTracking }) {
+export default function ServiceRequestForm({ preselectedService, onRequestSubmitted, onCancel, onClose, isModal = false }) {
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
     location: '',
+    locationUrl: '',
     vehicleYear: '2022',
     vehicleMakeModel: '',
-    serviceId: preselectedService || 'mobile-tire-change',
-    tireSize: '',
-    urgency: 'immediate',
+    serviceId: preselectedService || 'flat-tire-change',
     notes: ''
   });
 
@@ -25,25 +24,89 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
     }
   }, [preselectedService]);
 
+  const formatPhoneNumber = (value) => {
+    if (!value) return value;
+    if (value.startsWith('+')) return value;
+    const digits = value.replace(/\D/g, '');
+    // If 10 digits starting with Indian mobile prefixes (6,7,8,9), format cleanly
+    if (digits.length === 10 && ['6', '7', '8', '9'].includes(digits[0])) {
+      return `+91 ${digits.slice(0, 5)} ${digits.slice(5)}`;
+    }
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    if (digits.length <= 10) return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+    return value;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'phone') {
+      setFormData(prev => ({ ...prev, phone: formatPhoneNumber(value) }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleDetectLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      return;
+    }
+
     setIsLocating(true);
-    setTimeout(() => {
-      setFormData(prev => ({
-        ...prev,
-        location: '4800 Airport Fwy, Fort Worth, TX 76117 (Interstate 820 Exit 22A)'
-      }));
-      setIsLocating(false);
-    }, 800);
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        const mapsUrl = `https://maps.google.com/?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+          );
+          if (response.ok) {
+            const data = await response.json();
+            const address = data.display_name || `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+            setFormData(prev => ({ 
+              ...prev, 
+              location: address,
+              locationUrl: mapsUrl 
+            }));
+          } else {
+            setFormData(prev => ({
+              ...prev,
+              location: `GPS: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
+              locationUrl: mapsUrl
+            }));
+          }
+        } catch (err) {
+          setFormData(prev => ({
+            ...prev,
+            location: `GPS: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
+            locationUrl: mapsUrl
+          }));
+        } finally {
+          setIsLocating(false);
+        }
+      },
+      (error) => {
+        console.warn("Geolocation permission error or timeout:", error);
+        setFormData(prev => ({
+          ...prev,
+          location: 'Atlanta, GA (Current Location)',
+          locationUrl: 'https://maps.google.com/?q=Atlanta,GA'
+        }));
+        setIsLocating(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const mapsUrl = formData.locationUrl || `https://maps.google.com/?q=${encodeURIComponent(formData.location)}`;
 
     setTimeout(() => {
       const generatedId = `MTP-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -51,15 +114,12 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
         id: generatedId,
         customerName: formData.fullName || 'Customer',
         phone: formData.phone || BUSINESS_CONFIG.phone,
-        location: formData.location || 'Current GPS Location',
+        location: formData.location || 'Current Location',
+        locationUrl: mapsUrl,
         vehicle: `${formData.vehicleYear} ${formData.vehicleMakeModel || 'Vehicle'}`,
         serviceName: BUSINESS_CONFIG.services.find(s => s.id === formData.serviceId)?.title || 'Mobile Service',
-        tireSize: formData.tireSize,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        status: 'Technician Assigned',
-        etaMinutes: 14,
-        distanceMiles: 2.4,
-        technician: BUSINESS_CONFIG.demoTechnician
+        status: 'Technician Dispatched'
       };
 
       setSubmittedRequest(newRequest);
@@ -67,116 +127,136 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
       if (onRequestSubmitted) {
         onRequestSubmitted(newRequest);
       }
-    }, 1100);
+    }, 800);
   };
 
-  const isTireService = ['mobile-tire-change', 'flat-tire-repair', 'tire-replacement', 'tire-delivery'].includes(formData.serviceId);
+  const handleWhatsAppSubmit = (e) => {
+    // Validate form inputs first
+    const formElement = e.currentTarget.closest('form');
+    if (formElement && !formElement.checkValidity()) {
+      formElement.reportValidity();
+      return;
+    }
+
+    const selectedServiceObj = BUSINESS_CONFIG.services.find(s => s.id === formData.serviceId);
+    const serviceTitle = selectedServiceObj ? selectedServiceObj.title : 'Roadside Assistance';
+    const mapsUrl = formData.locationUrl || `https://maps.google.com/?q=${encodeURIComponent(formData.location)}`;
+
+    const waMessage = 
+`🚨 *CALL TYRONE 24/7 SERVICE REQUEST*
+---------------------------------------
+👤 *Name:* ${formData.fullName}
+📞 *Phone:* ${formData.phone}
+📍 *Location:* ${formData.location}
+🗺️ *Live Maps Link:* ${mapsUrl}
+🔧 *Service:* ${serviceTitle}
+🚗 *Vehicle:* ${formData.vehicleMakeModel}
+${formData.notes ? `📝 *Notes:* ${formData.notes}` : ''}
+---------------------------------------
+*Request Time:* ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+    const targetPhone = BUSINESS_CONFIG.whatsappPhoneRaw || BUSINESS_CONFIG.phoneRaw.replace(/[^0-9]/g, '');
+    const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(waMessage)}`;
+
+    window.open(waUrl, '_blank');
+
+    const generatedId = `MTP-${Math.floor(10000 + Math.random() * 90000)}`;
+    const newRequest = {
+      id: generatedId,
+      type: 'whatsapp',
+      customerName: formData.fullName || 'Customer',
+      phone: formData.phone || BUSINESS_CONFIG.phone,
+      location: formData.location || 'Current Location',
+      vehicle: `${formData.vehicleYear} ${formData.vehicleMakeModel || 'Vehicle'}`,
+      serviceName: serviceTitle,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      status: 'WhatsApp Dispatched'
+    };
+
+    setSubmittedRequest(newRequest);
+    if (onRequestSubmitted) {
+      onRequestSubmitted(newRequest);
+    }
+  };
+
+  const handleCloseAction = onCancel || onClose;
 
   return (
-    <section id="request-service" className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-950 border-y border-slate-800 relative overflow-hidden">
-      
-      {/* High-Visibility Background Image Layer */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=2000&q=80"
-          alt="Roadside emergency service technician repairing tire background"
-          className="w-full h-full object-cover opacity-50 filter brightness-105 contrast-110 saturate-110"
-        />
-        {/* Soft Vignette Overlay for Crisp Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/60 to-slate-950/30"></div>
-      </div>
-
-      <div className="max-w-4xl mx-auto space-y-8 relative z-10">
+    <div id="request-service" className="max-w-xl mx-auto relative w-full my-3 px-2 sm:px-0">
+      <div className="bg-slate-900 border border-slate-800 p-5 sm:p-6 rounded-2xl shadow-2xl space-y-3.5 relative overflow-hidden backdrop-blur-xl">
         
-        {/* Section Header */}
-        <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-2 bg-slate-950/90 border border-blue-500/60 text-blue-400 text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-full shadow-2xl backdrop-blur-md">
-            <Navigation className="w-3.5 h-3.5" />
-            <span>24/7 Mobile Dispatch Engine</span>
+        {/* Compact Header */}
+        <div className="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+          <div>
+            <span className="text-[10px] sm:text-xs font-black uppercase text-blue-400 bg-blue-500/10 border border-blue-500/30 px-2.5 py-0.5 rounded-full inline-block mb-1">
+              24/7 Rapid Dispatch
+            </span>
+            <h3 className="font-heading text-xl sm:text-2xl font-black uppercase text-white tracking-tight">
+              Request Service
+            </h3>
+            <p className="text-slate-300 text-xs mt-0.5">
+              Enter details for instant technician dispatch (15-30 min average ETA)
+            </p>
           </div>
 
-          <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-2xl">
-            REQUEST MOBILE <span className="bg-gradient-to-r from-blue-500 via-indigo-400 to-amber-400 bg-clip-text text-transparent">ROADSIDE ASSISTANCE</span>
-          </h2>
-
-          <p className="text-slate-200 text-xs sm:text-sm max-w-xl mx-auto font-medium drop-shadow-md">
-            Provide your breakdown location & vehicle details. Our system assigns the nearest active service unit with live GPS map telemetry.
-          </p>
+          {handleCloseAction && (
+            <button
+              type="button"
+              onClick={handleCloseAction}
+              className="p-1.5 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-full border border-slate-700 transition-all cursor-pointer shrink-0"
+              aria-label="Close form"
+              title="Close"
+            >
+              <X className="w-4.5 h-4.5" />
+            </button>
+          )}
         </div>
 
-        {/* Confirmation State vs Main Form */}
         {submittedRequest ? (
-          /* Confirmation Screen */
-          <div className="glass-panel p-6 sm:p-10 rounded-2xl border-2 border-emerald-500/60 shadow-2xl text-center space-y-6 animate-in zoom-in-95 duration-300 backdrop-blur-xl">
-            <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-500/40 animate-bounce">
-              <CheckCircle2 className="w-10 h-10" />
+          /* Clean & Simple Message Sent Screen */
+          <div className="py-6 text-center space-y-4 animate-in fade-in duration-200">
+            <div className="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-500/40 shadow-lg shadow-emerald-950/50">
+              <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <div className="space-y-1">
-              <span className="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                Service Request Confirmed
-              </span>
-              <h3 className="font-heading text-3xl font-black text-white">
-                SERVICE REQUEST #{submittedRequest.id}
-              </h3>
-              <p className="text-slate-300 text-sm">
-                Master Technician <strong className="text-white font-bold">{submittedRequest.technician.name}</strong> (Unit #408) has been dispatched!
+            <div className="space-y-1.5 max-w-md mx-auto">
+              <h4 className="font-heading text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+                {submittedRequest.type === 'whatsapp' ? 'REQUEST SENT VIA WHATSAPP!' : 'REQUEST SENT SUCCESSFULLY!'}
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                Thank you, <strong className="text-white font-bold">{submittedRequest.customerName}</strong>. Your request for <strong className="text-blue-400 font-bold">{submittedRequest.serviceName}</strong> has been received by our 24/7 dispatch team. We will reach out to you directly on <strong className="text-white font-bold">{submittedRequest.phone}</strong>.
               </p>
             </div>
 
-            {/* Request Summary Box */}
-            <div className="bg-slate-950/90 p-5 rounded-xl border border-slate-800 text-left grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-              <div>
-                <span className="text-slate-500 block text-[10px] uppercase font-black">Requested Service</span>
-                <span className="text-white font-bold text-base">{submittedRequest.serviceName}</span>
-              </div>
-
-              <div>
-                <span className="text-slate-500 block text-[10px] uppercase font-black">Estimated Arrival</span>
-                <span className="text-amber-400 font-black text-base">~{submittedRequest.etaMinutes} Minutes ({submittedRequest.distanceMiles} miles away)</span>
-              </div>
-
-              <div>
-                <span className="text-slate-500 block text-[10px] uppercase font-black">Dispatch Location</span>
-                <span className="text-white font-medium">{submittedRequest.location}</span>
-              </div>
-
-              <div>
-                <span className="text-slate-500 block text-[10px] uppercase font-black">Vehicle Details</span>
-                <span className="text-white font-medium">{submittedRequest.vehicle}</span>
-              </div>
-            </div>
-
-            {/* Actions CTA */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-              <button
-                onClick={() => onOpenTracking(submittedRequest)}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 rounded-xl uppercase tracking-wider shadow-lg shadow-amber-950/50 transition-all"
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5 max-w-md mx-auto">
+              <a
+                href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs sm:text-sm py-2.5 px-5 rounded-xl uppercase tracking-wider transition-all shadow-md"
               >
-                <Activity className="w-4 h-4" />
-                <span>Track Technician Live GPS Telemetry</span>
-              </button>
-
-              <button
-                onClick={handleResetForm}
-                className="w-full sm:w-auto text-slate-400 hover:text-white text-xs font-bold px-4 py-3 underline cursor-pointer"
-              >
-                Submit Another Request
-              </button>
+                <Phone className="w-4 h-4" />
+                <span>Call Dispatch ({BUSINESS_CONFIG.phone})</span>
+              </a>
+              
+              {handleCloseAction && (
+                <button
+                  type="button"
+                  onClick={handleCloseAction}
+                  className="w-full sm:w-auto py-2.5 px-5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs sm:text-sm rounded-xl uppercase tracking-wider cursor-pointer border border-slate-700 transition-all"
+                >
+                  Done / Close
+                </button>
+              )}
             </div>
           </div>
         ) : (
-          /* Main Form */
-          <form onSubmit={handleSubmit} className="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800/80 shadow-2xl space-y-5 backdrop-blur-xl bg-slate-950/85">
+          /* Simple & Easy Form */
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              
-              {/* Customer Name */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <User className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                  Your Full Name <span className="text-blue-500">*</span>
+            {/* Name & Phone */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-blue-400" /> Full Name *
                 </label>
                 <input
                   type="text"
@@ -185,66 +265,63 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                   placeholder="e.g. David Miller"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
+                  className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 outline-none transition-colors"
                 />
               </div>
 
-              {/* Phone Number */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                  Callback Phone Number <span className="text-blue-500">*</span>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-blue-400" /> Phone Number *
                 </label>
                 <input
                   type="tel"
                   name="phone"
                   required
-                  placeholder="(555) 000-0000"
+                  placeholder="(404) 000-0000"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
+                  className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 outline-none transition-colors"
                 />
               </div>
+            </div>
 
-              {/* Location Input with GPS button */}
-              <div className="md:col-span-2 space-y-1.5">
-                <div className="flex items-center justify-between gap-2">
-                  <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                    Current Breakdown Location / Address <span className="text-blue-500">*</span>
-                  </label>
-                  <button
-                    type="button"
-                    onClick={handleDetectLocation}
-                    disabled={isLocating}
-                    className="text-[11px] font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 cursor-pointer shrink-0"
-                  >
-                    <Navigation className="w-3 h-3 animate-spin-slow" />
-                    <span>{isLocating ? 'Detecting...' : '📍 Detect My Location'}</span>
-                  </button>
-                </div>
-                <input
-                  type="text"
-                  name="location"
-                  required
-                  placeholder="Street address, highway exit number, or landmark (e.g. I-35W Exit 42)"
-                  value={formData.location}
-                  onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all"
-                />
+            {/* Location */}
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-blue-400" /> Breakdown Location *
+                </label>
+                <button
+                  type="button"
+                  onClick={handleDetectLocation}
+                  disabled={isLocating}
+                  className="text-xs font-bold text-amber-400 hover:underline cursor-pointer"
+                >
+                  {isLocating ? 'Locating...' : '📍 GPS Detect'}
+                </button>
               </div>
+              <input
+                type="text"
+                name="location"
+                required
+                placeholder="Street address or highway exit (e.g. I-35 Exit 42)"
+                value={formData.location}
+                onChange={handleChange}
+                className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 outline-none transition-colors"
+              />
+            </div>
 
-              {/* Service Required Dropdown */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Disc className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                  Select Required Service <span className="text-blue-500">*</span>
+            {/* Service & Vehicle */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                  <Disc className="w-3.5 h-3.5 text-blue-400" /> Required Service *
                 </label>
                 <select
                   name="serviceId"
                   value={formData.serviceId}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all"
+                  className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white outline-none transition-colors"
                 >
                   {BUSINESS_CONFIG.services.map(s => (
                     <option key={s.id} value={s.id}>
@@ -254,116 +331,88 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
                 </select>
               </div>
 
-              {/* Urgency Selection */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                  Service Urgency <span className="text-blue-500">*</span>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                  <Car className="w-3.5 h-3.5 text-blue-400" /> Vehicle Model *
                 </label>
-                <select
-                  name="urgency"
-                  value={formData.urgency}
+                <input
+                  type="text"
+                  name="vehicleMakeModel"
+                  required
+                  placeholder="e.g. 2022 Ford F-150"
+                  value={formData.vehicleMakeModel}
                   onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all"
-                >
-                  <option value="immediate">⚡ Immediate Rapid Dispatch (15-30 Min)</option>
-                  <option value="scheduled">📅 Schedule Service For Later Today</option>
-                </select>
+                  className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 outline-none transition-colors"
+                />
               </div>
-
-              {/* Vehicle Specs */}
-              <div className="md:col-span-2 space-y-1.5">
-                <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                  <Car className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                  Vehicle Year, Make & Model <span className="text-blue-500">*</span>
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  <input
-                    type="text"
-                    name="vehicleYear"
-                    placeholder="Year (2022)"
-                    value={formData.vehicleYear}
-                    onChange={handleChange}
-                    className="bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
-                  />
-                  <input
-                    type="text"
-                    name="vehicleMakeModel"
-                    required
-                    placeholder="Make & Model (e.g. Ford F-150 / Tesla Y)"
-                    value={formData.vehicleMakeModel}
-                    onChange={handleChange}
-                    className="sm:col-span-2 bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Conditional Tire Size Input */}
-              {isTireService && (
-                <div className="md:col-span-2 space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                      <Disc className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      Tire Size (Printed on Sidewall)
-                    </label>
-                    <span className="text-[10px] text-slate-400">Optional e.g. 225/65R17</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="tireSize"
-                    placeholder="e.g. 225/65R17 or 275/55R20"
-                    value={formData.tireSize}
-                    onChange={handleChange}
-                    className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
-                  />
-                </div>
-              )}
-
-              {/* Notes */}
-              <div className="md:col-span-2 space-y-1.5">
-                <label className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                  Breakdown Notes / Safety Hazards (Optional)
-                </label>
-                <textarea
-                  name="notes"
-                  rows="2"
-                  placeholder="e.g. Parked on left shoulder near highway exit 22, hazard lights on."
-                  value={formData.notes}
-                  onChange={handleChange}
-                  className="w-full bg-slate-950/90 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none resize-none"
-                ></textarea>
-              </div>
-
             </div>
 
-            {/* Submit Button */}
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm sm:text-base py-4 rounded-xl shadow-2xl shadow-blue-950 hover:shadow-blue-600/50 uppercase tracking-wider transition-all transform active:scale-98"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Navigation className="w-5 h-5 animate-spin shrink-0" />
-                    <span>LOCATING NEAREST SERVICE UNIT...</span>
-                  </>
-                ) : (
-                  <>
-                    <Navigation className="w-5 h-5 shrink-0" />
-                    <span>DISPATCH MOBILE TECHNICIAN NOW</span>
-                  </>
-                )}
-              </button>
+            {/* Notes */}
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-200">Notes / Hazards (Optional)</label>
+              <input
+                type="text"
+                name="notes"
+                placeholder="e.g. Parked on shoulder, hazard lights on"
+                value={formData.notes}
+                onChange={handleChange}
+                className="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 outline-none transition-colors"
+              />
+            </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-3 text-[11px] text-slate-300 font-medium">
-                <span className="flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Upfront Rate Guarantee
-                </span>
-                <span className="hidden sm:inline">•</span>
-                <span>No Credit Card Upfront</span>
-                <span className="hidden sm:inline">•</span>
-                <span>Instant GPS Map Tracking</span>
+            {/* Action Buttons: Direct Dispatch & WhatsApp */}
+            <div className="pt-2 space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {/* Button 1: Normal / Direct Dispatch */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs sm:text-sm py-3 px-3.5 rounded-xl shadow-lg uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Navigation className="w-4 h-4 animate-spin" />
+                      <span>Dispatching...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Navigation className="w-4 h-4" />
+                      <span>📨 Direct Request</span>
+                    </>
+                  )}
+                </button>
+
+                {/* Button 2: Send via WhatsApp */}
+                <button
+                  type="button"
+                  onClick={handleWhatsAppSubmit}
+                  disabled={isSubmitting}
+                  className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs sm:text-sm py-3 px-3.5 rounded-xl shadow-lg uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                  </svg>
+                  <span>💬 Send via WhatsApp</span>
+                </button>
+              </div>
+
+              {handleCloseAction && (
+                <button
+                  type="button"
+                  onClick={handleCloseAction}
+                  className="w-full py-2 px-3.5 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-slate-400 hover:text-slate-200 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
+
+            <div className="text-center pt-1 text-[10px] text-slate-400 font-medium space-y-1">
+              <div className="flex items-center justify-center gap-1">
+                <ShieldCheck className="w-3 h-3 text-emerald-400 inline" /> Distance-based pricing • Instant upfront quote • No Credit Card Upfront
+              </div>
+              <div className="text-amber-300 font-semibold text-[10px]">
+                Note: After-hour fees will be added for calls between 6:00 PM and 6:00 AM.
               </div>
             </div>
 
@@ -371,6 +420,6 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
         )}
 
       </div>
-    </section>
+    </div>
   );
 }

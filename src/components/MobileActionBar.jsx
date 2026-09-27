@@ -5,7 +5,7 @@ import { BUSINESS_CONFIG } from '../config/businessConfig';
 export default function MobileActionBar({ onRequestService, onOpenTracking, activeRequestId }) {
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 p-2.5 shadow-2xl">
-      <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
+      <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
         
         {/* Call Hotline */}
         <a
@@ -16,7 +16,8 @@ export default function MobileActionBar({ onRequestService, onOpenTracking, acti
           <span className="text-[10px] font-black uppercase tracking-wider text-white">Call 24/7</span>
         </a>
 
-        {/* Track Service */}
+        {/* Track Service (Disabled as requested) */}
+        {/*
         <button
           onClick={onOpenTracking}
           className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 active:scale-95 transition-transform"
@@ -26,6 +27,7 @@ export default function MobileActionBar({ onRequestService, onOpenTracking, acti
             {activeRequestId ? `Track #${activeRequestId.slice(-4)}` : 'Track Service'}
           </span>
         </button>
+        */}
 
         {/* Request Service */}
         <button

@@ -1,0 +1,7 @@
+# Robots.txt for Call Tyrone LLC - 24/7 Mobile Tire & Roadside Assistance USA
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+Sitemap: https://calltyrone.com/sitemap.xml

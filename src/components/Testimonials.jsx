@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote, CheckCircle2 } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const reviews = BUSINESS_CONFIG.testimonials;
+
+  // Auto-slide reviews continuously every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [reviews.length]);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length);
@@ -38,7 +46,7 @@ export default function Testimonials() {
           </div>
 
           <h2 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white drop-shadow-md">
-            WHAT DRIVERS SAY ABOUT <span className="text-blue-500">MOBILE TIRE PLUS</span>
+            WHAT DRIVERS SAY ABOUT <span className="text-blue-500">CALL TYRONE</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
@@ -47,7 +55,11 @@ export default function Testimonials() {
         </div>
 
         {/* Reviews Carousel Container */}
-        <div className="max-w-4xl mx-auto relative">
+        <div 
+          className="max-w-4xl mx-auto relative"
+          onMouseEnter={() => setIsPlaying(false)}
+          onMouseLeave={() => setIsPlaying(true)}
+        >
           
           <div className="glass-panel p-6 sm:p-10 rounded-2xl border border-slate-800 shadow-2xl relative space-y-6">
             <Quote className="w-12 h-12 text-blue-500/20 absolute top-6 right-6 pointer-events-none" />
@@ -63,7 +75,7 @@ export default function Testimonials() {
             </div>
 
             {/* Comment Quote */}
-            <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed italic">
+            <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed italic min-h-[72px]">
               "{reviews[currentIndex].comment}"
             </p>
 
@@ -99,7 +111,7 @@ export default function Testimonials() {
                 <button
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`w-3 h-3 rounded-full transition-all ${
+                  className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
                     idx === currentIndex ? 'bg-blue-500 w-8' : 'bg-slate-800 hover:bg-slate-700'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}

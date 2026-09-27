@@ -41,9 +41,16 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
           
           {/* Col 1: Brand & Tagline */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-amber-500 text-white flex items-center justify-center font-bold">
-                <Disc className="w-6 h-6 animate-spin-slow text-yellow-300" />
+            <div className="flex items-center gap-3.5">
+              <div className="relative w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 via-indigo-500 to-amber-400 shadow-xl flex items-center justify-center bg-slate-950 shrink-0">
+                <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden p-0.5 border border-slate-800">
+                  <img 
+                    src={BUSINESS_CONFIG.logo} 
+                    alt={BUSINESS_CONFIG.name} 
+                    className="w-full h-full object-cover rounded-full"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                </div>
               </div>
               <span className="font-heading font-black text-xl text-white uppercase tracking-tight">
                 CALL <span className="text-blue-500">TYRONE</span>
@@ -91,7 +98,7 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
           <div className="space-y-3">
             <h4 className="font-heading text-sm font-bold text-white uppercase tracking-wider">Quick Navigation</h4>
             <ul className="space-y-2 text-slate-400">
-              <li><button onClick={onOpenTracking} className="hover:text-amber-400 font-bold text-amber-500">📍 Real-Time Service Tracking</button></li>
+              {/* <li><button onClick={onOpenTracking} className="hover:text-amber-400 font-bold text-amber-500">📍 Real-Time Service Tracking</button></li> */}
               <li><button onClick={onOpenDownloadGuide} className="hover:text-blue-400 text-left">📄 Download Emergency Guide</button></li>
               <li><a href="#service-areas" className="hover:text-blue-400">USA Service Areas</a></li>
               <li><a href="#pricing" className="hover:text-blue-400">Pricing & Estimates</a></li>
