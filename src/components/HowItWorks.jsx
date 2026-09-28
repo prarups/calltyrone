@@ -22,10 +22,10 @@ export default function HowItWorks({ onRequestService }) {
     },
     {
       num: "03",
-      title: "Track Technician Live",
-      desc: "Watch your assigned technician travel towards your location on our real-time map with live ETA & driver profile.",
+      title: "Instant ETA & Tech Dispatch",
+      desc: "Our 24/7 dispatch team confirms your location, provides a direct ETA, and dispatches the nearest mobile unit immediately.",
       icon: Truck,
-      badge: "Live Telemetry"
+      badge: "15-30 Min ETA"
     },
     {
       num: "04",
@@ -47,7 +47,7 @@ export default function HowItWorks({ onRequestService }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
-    }, 2500);
+    }, 4000);
     return () => clearInterval(interval);
   }, [steps.length]);
 
@@ -57,8 +57,9 @@ export default function HowItWorks({ onRequestService }) {
       {/* Background Section Image Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=70"
           alt="How it works roadside assistance vehicle background"
+          loading="lazy"
           className="w-full h-full object-cover opacity-20 filter brightness-110 contrast-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/90 to-slate-900"></div>

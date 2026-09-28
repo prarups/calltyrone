@@ -9,8 +9,9 @@ export default function Pricing({ onRequestService }) {
       {/* Background Section Image Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=70"
           alt="Transparent pricing vehicle background"
+          loading="lazy"
           className="w-full h-full object-cover opacity-20 filter brightness-110 contrast-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/90 to-slate-900"></div>

@@ -18,8 +18,9 @@ export default function Services({ onSelectService }) {
       {/* Background Section Image Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1586191582056-8a192138942b?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1586191582056-8a192138942b?auto=format&fit=crop&w=1000&q=70"
           alt="Mobile tire service background"
+          loading="lazy"
           className="w-full h-full object-cover opacity-20 filter brightness-110 contrast-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-slate-950"></div>

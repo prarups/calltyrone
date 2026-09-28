@@ -12,6 +12,7 @@ export const BUSINESS_CONFIG = {
   whatsappPhoneRaw: "14044822246", // Client USA WhatsApp target (404) 482-2246
   email: "info@mobiletireplus.com",
   supportEmail: "info@mobiletireplus.com",
+  dispatchEmail: "info@mobiletireplus.com", // Target Email for receiving form requests via FormSubmit
   website: "https://calltyrone.com",
   domain: "calltyrone.com",
   serverUrl: "https://api.calltyrone.com",
@@ -45,21 +46,21 @@ export const BUSINESS_CONFIG = {
     { 
       name: "Greater Atlanta Central Metro", 
       state: "GA", 
-      zipPrefixes: ["30", "31", "39"], 
+      zipPrefixes: ["303", "300", "311", "399"], 
       units: 24, 
       popularCities: ["Atlanta", "Buckhead", "Decatur", "Midtown", "Downtown Atlanta", "Sandy Springs", "East Point"] 
     },
     { 
       name: "North Atlanta Suburbs (50-Mile Zone)", 
       state: "GA", 
-      zipPrefixes: ["30"], 
+      zipPrefixes: ["300", "301", "305"], 
       units: 18, 
       popularCities: ["Marietta", "Alpharetta", "Roswell", "Dunwoody", "Cumming", "Johns Creek", "Suwanee", "Milton", "Canton"] 
     },
     { 
       name: "East & South Metro (50-Mile Zone)", 
       state: "GA", 
-      zipPrefixes: ["30", "31"], 
+      zipPrefixes: ["300", "302", "306"], 
       units: 16, 
       popularCities: ["Lawrenceville", "Duluth", "Norcross", "Smyrna", "McDonough", "Newnan", "Douglasville", "Peachtree City"] 
     }

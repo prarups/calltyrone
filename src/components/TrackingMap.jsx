@@ -66,7 +66,7 @@ export default function TrackingMap({ techProgress, activeStageIndex, onRefreshL
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
         <div className="flex flex-col">
-          <span className="text-[9px] uppercase font-black text-slate-400 tracking-wider">GPS Telemetry</span>
+          <span className="text-[9px] uppercase font-black text-slate-400 tracking-wider">Dispatch Status</span>
           <span className="text-[11px] font-bold text-white flex items-center gap-1">
             <Compass className="w-3 h-3 text-blue-500 animate-spin-slow shrink-0" />
             Unit #408 • 34 MPH

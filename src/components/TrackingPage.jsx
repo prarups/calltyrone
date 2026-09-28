@@ -167,7 +167,7 @@ export default function TrackingPage({ requestData, onBackToHome }) {
             <div className="space-y-1">
               <h3 className="font-heading text-2xl font-black text-white uppercase">Track Active Request</h3>
               <p className="text-xs text-slate-300 max-w-md mx-auto">
-                Enter your Service Request ID to view live GPS map telemetry, driver profile, and updated arrival ETA.
+                Enter your Service Request ID to view live dispatch status, assigned unit info, and arrival ETA.
               </p>
             </div>
 
@@ -303,7 +303,7 @@ export default function TrackingPage({ requestData, onBackToHome }) {
                     className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-bold text-white py-3 rounded-xl transition-all cursor-pointer"
                   >
                     {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4 text-blue-400" />}
-                    <span>{copiedLink ? 'Tracking Link Copied!' : 'Share Live GPS Tracking Link'}</span>
+                    <span>{copiedLink ? 'Status Link Copied!' : 'Share Request Status Link'}</span>
                   </button>
 
                   <button

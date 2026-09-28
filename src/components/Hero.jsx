@@ -6,15 +6,15 @@ export default function Hero({ onRequestService, onOpenTracking }) {
   // Vibrant, high-definition authentic USA roadside assistance images
   const heroSlides = [
     {
-      url: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=2000&q=80",
+      url: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=1200&q=70",
       caption: "Highway Emergency Flat Tire Change Service"
     },
     {
-      url: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=2000&q=80",
+      url: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=70",
       caption: "On-Site Computerized Tire Mounting & Puncture Vulcanize"
     },
     {
-      url: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=2000&q=80",
+      url: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=70",
       caption: "24/7 Mobile Service Unit Van Dispatched Directly To You"
     }
   ];
@@ -111,7 +111,7 @@ export default function Hero({ onRequestService, onOpenTracking }) {
               </div>
               <div className="flex items-center gap-2 bg-slate-950/70 px-2.5 py-1.5 rounded-lg border border-slate-800/80 backdrop-blur-sm">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                <span>Real-Time Driver GPS Tracking</span>
+                <span>24/7 Rapid Dispatch Guaranteed</span>
               </div>
             </div>
 

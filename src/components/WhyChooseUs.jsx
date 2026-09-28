@@ -16,7 +16,7 @@ export default function WhyChooseUs() {
     {
       id: "01",
       title: "24/7/365 Master Emergency Dispatch",
-      desc: "Rain, snow, dark night or holiday weekend — our master dispatch center operates 24 hours a day with real GPS tracking to keep Atlanta drivers safe.",
+      desc: "Rain, snow, dark night or holiday weekend — our master dispatch center operates 24 hours a day with rapid unit dispatch to keep Atlanta drivers safe.",
       icon: Clock,
       badge: "ALWAYS ACTIVE",
       color: "from-blue-500 to-indigo-600",
@@ -73,7 +73,7 @@ export default function WhyChooseUs() {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % reasons.length);
-    }, 3500);
+    }, 5000);
     return () => clearInterval(timer);
   }, [reasons.length]);
 
@@ -83,8 +83,9 @@ export default function WhyChooseUs() {
       {/* Background Section Image & Animated Light Orbs */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1000&q=70"
           alt="High tech service background"
+          loading="lazy"
           className="w-full h-full object-cover opacity-15 filter brightness-110 contrast-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/90 to-slate-900"></div>

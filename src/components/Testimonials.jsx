@@ -28,8 +28,9 @@ export default function Testimonials() {
       {/* Background Section Image Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=70"
           alt="Night roadside assistance testimonials background"
+          loading="lazy"
           className="w-full h-full object-cover opacity-20 filter brightness-110 contrast-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-slate-950"></div>

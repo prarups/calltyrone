@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Navigation, Car, Phone, User, Disc, CheckCircle2, ShieldCheck, X } from 'lucide-react';
+import { MapPin, Navigation, Car, Phone, User, Disc, CheckCircle2, ShieldCheck, X, Send } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function ServiceRequestForm({ preselectedService, onRequestSubmitted, onCancel, onClose, isModal = false }) {
@@ -107,7 +107,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -118,45 +118,54 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
     const userLocation = formData.location.trim();
     const mapsUrl = formData.locationUrl || `https://maps.google.com/?q=${encodeURIComponent(userLocation)}`;
 
-    const waMessage = 
-`🚨 *CALL TYRONE 24/7 SERVICE REQUEST*
----------------------------------------
-👤 *Name:* ${formData.fullName}
-📞 *Phone:* ${formData.phone}
-📍 *Location:* ${userLocation}
-🗺️ *Live Maps Link:* ${mapsUrl}
-🔧 *Service:* ${serviceTitle}
-🚗 *Vehicle:* ${formData.vehicleMakeModel}
-${formData.notes ? `📝 *Notes:* ${formData.notes}` : ''}
----------------------------------------
-*Request Time:* ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    const targetEmail = BUSINESS_CONFIG.dispatchEmail || BUSINESS_CONFIG.email || 'info@mobiletireplus.com';
 
-    const targetPhone = BUSINESS_CONFIG.whatsappPhoneRaw || BUSINESS_CONFIG.phoneRaw.replace(/[^0-9]/g, '');
-    const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(waMessage)}`;
+    const emailPayload = {
+      _subject: `🚨 NEW SERVICE DISPATCH: ${serviceTitle} - ${formData.fullName}`,
+      _captcha: "false",
+      _template: "table",
+      "Customer Name": formData.fullName,
+      "Phone Number": formData.phone,
+      "Service Requested": serviceTitle,
+      "Vehicle Info": `${formData.vehicleYear} ${formData.vehicleMakeModel || ''}`.trim(),
+      "Breakdown Location": userLocation,
+      "Google Maps GPS Link": mapsUrl,
+      "Additional Notes": formData.notes || 'None provided',
+      "Submitted Time": new Date().toLocaleString()
+    };
 
-    window.open(waUrl, '_blank');
+    try {
+      await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(emailPayload)
+      });
+    } catch (error) {
+      console.warn("FormSubmit email dispatch background error:", error);
+    }
 
-    setTimeout(() => {
-      const generatedId = `MTP-${Math.floor(10000 + Math.random() * 90000)}`;
-      const newRequest = {
-        id: generatedId,
-        type: 'whatsapp',
-        customerName: formData.fullName || 'Customer',
-        phone: formData.phone || BUSINESS_CONFIG.phone,
-        location: formData.location || 'Current Location',
-        locationUrl: mapsUrl,
-        vehicle: `${formData.vehicleYear} ${formData.vehicleMakeModel || 'Vehicle'}`,
-        serviceName: serviceTitle,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        status: 'WhatsApp Dispatched'
-      };
+    const generatedId = `MTP-${Math.floor(10000 + Math.random() * 90000)}`;
+    const newRequest = {
+      id: generatedId,
+      type: 'email',
+      customerName: formData.fullName || 'Customer',
+      phone: formData.phone || BUSINESS_CONFIG.phone,
+      location: formData.location || 'Current Location',
+      locationUrl: mapsUrl,
+      vehicle: `${formData.vehicleYear} ${formData.vehicleMakeModel || 'Vehicle'}`,
+      serviceName: serviceTitle,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      status: 'Dispatched to Dispatch Email'
+    };
 
-      setSubmittedRequest(newRequest);
-      setIsSubmitting(false);
-      if (onRequestSubmitted) {
-        onRequestSubmitted(newRequest);
-      }
-    }, 400);
+    setSubmittedRequest(newRequest);
+    setIsSubmitting(false);
+    if (onRequestSubmitted) {
+      onRequestSubmitted(newRequest);
+    }
   };
 
   const handleCloseAction = onCancel || onClose;
@@ -201,10 +210,10 @@ ${formData.notes ? `📝 *Notes:* ${formData.notes}` : ''}
 
             <div className="space-y-1.5 max-w-md mx-auto">
               <h4 className="font-heading text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-                REQUEST SENT VIA WHATSAPP!
+                SERVICE REQUEST DISPATCHED!
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-                Thank you, <strong className="text-white font-bold">{submittedRequest.customerName}</strong>. Your request for <strong className="text-blue-400 font-bold">{submittedRequest.serviceName}</strong> has been opened in WhatsApp to send directly to our dispatch team at <strong className="text-white font-bold">{BUSINESS_CONFIG.phone}</strong>.
+                Thank you, <strong className="text-white font-bold">{submittedRequest.customerName}</strong>. Your request for <strong className="text-blue-400 font-bold">{submittedRequest.serviceName}</strong> has been emailed directly to our 24/7 dispatch team. A technician will call you at <strong className="text-white font-bold">{submittedRequest.phone}</strong> within 5-15 minutes.
               </p>
             </div>
 
@@ -340,17 +349,15 @@ ${formData.notes ? `📝 *Notes:* ${formData.notes}` : ''}
               />
             </div>
 
-            {/* Single Prominent WhatsApp Dispatch Action Button */}
+            {/* Submit Request Action Button */}
             <div className="pt-2 space-y-2">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-sm sm:text-base py-3.5 px-4 rounded-xl shadow-xl uppercase tracking-wider transition-all cursor-pointer hover:shadow-emerald-900/40"
+                className="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm sm:text-base py-3.5 px-4 rounded-xl shadow-xl uppercase tracking-wider transition-all cursor-pointer hover:shadow-blue-900/40 disabled:opacity-50"
               >
-                <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                </svg>
-                <span>💬 Send Service Request via WhatsApp</span>
+                <Send className="w-5 h-5 shrink-0" />
+                <span>{isSubmitting ? 'Submitting Request...' : 'Submit Request'}</span>
               </button>
 
               {handleCloseAction && (
