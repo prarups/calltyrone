@@ -7,7 +7,7 @@ export default function ServiceAreas({ onRequestService }) {
   const [searchResult, setSearchResult] = useState(null);
 
   const quickZipPresets = [
-    { city: 'Atlanta Downtown', zip: '30301' },
+    { city: 'Atlanta Downtown', zip: '30303' },
     { city: 'Alpharetta / Milton', zip: '30004' },
     { city: 'Marietta / Cobb', zip: '30062' },
     { city: 'Stockbridge / Henry', zip: '30281' },
@@ -24,23 +24,23 @@ export default function ServiceAreas({ onRequestService }) {
         covered: false,
         zip: cleanZip,
         message: "Invalid ZIP Code format. Please enter a 5-digit US ZIP code.",
-        units: "Example Atlanta ZIPs: 30301, 30004, 30062, 30281",
+        units: "Example Atlanta ZIPs: 30303, 30004, 30062, 30281",
         eta: "50-Mile Greater Atlanta Service Radius Only"
       });
       return;
     }
 
-    const prefix3 = cleanZip.substring(0, 3);
-    const validAtlantaPrefixes = ["300", "301", "302", "303", "305", "306", "311", "399"];
+    const isCovered = BUSINESS_CONFIG.supportedZipCodes
+      ? BUSINESS_CONFIG.supportedZipCodes.includes(cleanZip)
+      : ["300", "301", "302", "303", "305", "306"].includes(cleanZip.substring(0, 3));
 
-    const isCovered = validAtlantaPrefixes.includes(prefix3);
     const matchedZone = BUSINESS_CONFIG.serviceAreas.find(zone => 
       zone.zipPrefixes.some(p => cleanZip.startsWith(p))
     );
 
     if (isCovered) {
       const unitsCount = matchedZone ? matchedZone.units : Math.floor(12 + Math.random() * 8);
-      const zoneName = matchedZone ? matchedZone.name : `Greater Atlanta 50-Mile Coverage Zone (${cleanZip})`;
+      const zoneName = matchedZone ? matchedZone.name : `Greater Atlanta Service Area (${cleanZip})`;
       
       setSearchResult({
         covered: true,
@@ -56,9 +56,9 @@ export default function ServiceAreas({ onRequestService }) {
         covered: false,
         zip: cleanZip,
         message: `OUTSIDE SERVICE RADIUS: ZIP ${cleanZip}`,
-        subtext: `ZIP code ${cleanZip} is outside our 50-mile Greater Atlanta service boundary.`,
+        subtext: `ZIP code ${cleanZip} is currently outside our 165 verified Greater Atlanta service areas.`,
         units: "No standard mobile units stationed in this distant area",
-        eta: `Call dispatch hotline ${BUSINESS_CONFIG.phone} for long-distance highway inquiries`
+        eta: `Call dispatch hotline ${BUSINESS_CONFIG.phone} for custom highway dispatch inquiries`
       });
     }
   };
