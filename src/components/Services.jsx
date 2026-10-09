@@ -8,7 +8,8 @@ export default function Services({ onSelectService }) {
 
   const filteredServices = BUSINESS_CONFIG.services.filter(s => {
     if (filter === 'tires') return ['flat-tire-change', 'mount-and-balance'].includes(s.id);
-    if (filter === 'emergency') return ['jump-start', 'fuel-delivery', 'lockout-service', 'mobile-call-off'].includes(s.id);
+    if (filter === 'emergency') return ['jump-start', 'battery-replacement', 'fuel-delivery', 'lockout-service', 'mobile-call-off'].includes(s.id);
+    if (filter === 'maintenance') return ['mobile-oil-change', 'brake-pad-replacement', 'brake-pads-and-rotors', 'battery-replacement'].includes(s.id);
     return true;
   });
 
@@ -71,18 +72,18 @@ export default function Services({ onSelectService }) {
           <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border cursor-pointer ${
                 filter === 'all' 
                   ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
                   : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
               }`}
             >
-              All 6 Services
+              All Services ({BUSINESS_CONFIG.services.length})
             </button>
 
             <button
               onClick={() => setFilter('tires')}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border ${
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border cursor-pointer ${
                 filter === 'tires' 
                   ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
                   : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
@@ -94,7 +95,7 @@ export default function Services({ onSelectService }) {
 
             <button
               onClick={() => setFilter('emergency')}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border ${
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border cursor-pointer ${
                 filter === 'emergency' 
                   ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
                   : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
@@ -102,6 +103,18 @@ export default function Services({ onSelectService }) {
             >
               <Zap className="w-3.5 h-3.5" />
               <span>Emergency Services (4)</span>
+            </button>
+
+            <button
+              onClick={() => setFilter('maintenance')}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all uppercase tracking-wider border cursor-pointer ${
+                filter === 'maintenance' 
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-900/40' 
+                  : 'bg-slate-900/90 text-slate-300 border-slate-800 hover:border-slate-700 backdrop-blur-sm'
+              }`}
+            >
+              <Wrench className="w-3.5 h-3.5" />
+              <span>Brakes & Oil Change (3)</span>
             </button>
           </div>
 

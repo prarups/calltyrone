@@ -2,7 +2,7 @@ import React from 'react';
 import { Disc, PhoneCall, MapPin } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
-export default function Footer({ onRequestService, onOpenTracking, onOpenDownloadGuide }) {
+export default function Footer({ onRequestService, onOpenTracking, onOpenDownloadGuide, onOpenBatteryService }) {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 text-slate-400 pt-12 pb-24 lg:pb-12 text-xs relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
@@ -87,7 +87,15 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
             <h4 className="font-heading text-sm font-bold text-white uppercase tracking-wider">Roadside & Battery</h4>
             <ul className="space-y-2 text-slate-400">
               <li><a href="#services" className="hover:text-blue-400">Battery Jump-Start (12V/24V)</a></li>
-              <li><a href="#services" className="hover:text-blue-400">Mobile Battery Replacement</a></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={onOpenBatteryService}
+                  className="hover:text-amber-400 text-amber-400 font-bold text-left cursor-pointer"
+                >
+                  🔋 New Battery Delivery & Install
+                </button>
+              </li>
               <li><a href="#services" className="hover:text-blue-400">Damage-Free Lockout Entry</a></li>
               <li><a href="#services" className="hover:text-blue-400">Fuel & Diesel Delivery</a></li>
               <li><a href="#services" className="hover:text-blue-400">Flatbed Towing & Recovery</a></li>
@@ -111,7 +119,7 @@ export default function Footer({ onRequestService, onOpenTracking, onOpenDownloa
 
         {/* Bottom Copyright & Disclaimer */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-400 border-t border-slate-900 pt-6">
-          <p>© {new Date().getFullYear()} Call Tyrone LLC. All rights reserved. 24/7 Mobile Tire & Roadside Assistance USA.</p>
+          <p>© {new Date().getFullYear()} Call Tyrone. All rights reserved. 24/7 Mobile Tire & Roadside Assistance USA.</p>
           <div className="flex items-center gap-4">
             <a href="#home" className="hover:text-slate-300">Privacy Policy</a>
             <span>•</span>

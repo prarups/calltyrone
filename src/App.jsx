@@ -15,12 +15,13 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import MobileActionBar from './components/MobileActionBar';
 import TrackingPage from './components/TrackingPage';
+import BatteryServicePage from './components/BatteryServicePage';
 import DownloadGuideModal from './components/DownloadGuideModal';
 import { X } from 'lucide-react';
 import { BUSINESS_CONFIG } from './config/businessConfig';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState('main'); // 'main' | 'tracking'
+  const [currentView, setCurrentView] = useState('main'); // 'main' | 'battery-service' | 'tracking'
   const [activeSection, setActiveSection] = useState('home');
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isDownloadGuideOpen, setIsDownloadGuideOpen] = useState(false);
@@ -77,7 +78,16 @@ export default function App() {
     setIsRequestModalOpen(true);
   };
 
+  const handleOpenBatteryService = () => {
+    setCurrentView('battery-service');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleServiceSelectedFromGrid = (serviceId) => {
+    if (serviceId === 'battery-replacement') {
+      handleOpenBatteryService();
+      return;
+    }
     setSelectedServiceId(serviceId);
     setIsRequestModalOpen(true);
   };
@@ -105,23 +115,23 @@ export default function App() {
         onNavigateSection={handleNavigateSection}
         onOpenTracking={() => handleOpenTrackingView()}
         onRequestService={() => handleOpenRequestForm()}
+        onOpenBatteryService={handleOpenBatteryService}
         activeSection={activeSection}
         activeRequestId={activeRequest?.id}
+        currentView={currentView}
       />
 
-      {/* Main Landing View (Tracking page view commented out for future use) */}
-      {/*
-      {currentView === 'tracking' && (
-        <TrackingPage
-          requestData={activeRequest}
+      {/* Main View vs Dedicated Battery Service Page */}
+      {currentView === 'battery-service' ? (
+        <BatteryServicePage
           onBackToHome={() => {
             setCurrentView('main');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
+          onRequestSubmitted={handleRequestSubmitted}
         />
-      )}
-      */}
-      <main className="space-y-0">
+      ) : (
+        <main className="space-y-0">
           {/* Hero Section */}
           <Hero
             onRequestService={() => handleOpenRequestForm()}
@@ -162,11 +172,13 @@ export default function App() {
           {/* Contact & Corporate Fleet Inquiry Form */}
           <Contact onOpenDownloadGuide={() => setIsDownloadGuideOpen(true)} />
         </main>
+      )}
 
       {/* Footer */}
       <Footer
         onRequestService={() => handleOpenRequestForm()}
         onOpenTracking={() => handleOpenTrackingView()}
+        onOpenBatteryService={handleOpenBatteryService}
         onOpenDownloadGuide={() => setIsDownloadGuideOpen(true)}
       />
 

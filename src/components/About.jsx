@@ -5,7 +5,7 @@ import { BUSINESS_CONFIG } from '../config/businessConfig';
 export default function About() {
   const stats = [
     { label: "Availability", value: "24/7/365", sub: "Round-the-clock dispatch", icon: Clock, color: "text-amber-400" },
-    { label: "Avg Response Time", value: "15-30 Min", sub: "Across metro corridors", icon: Zap, color: "text-blue-400" },
+    { label: "Response Time", value: "Fastest Arrival Time", sub: "Across metro corridors", icon: Zap, color: "text-blue-400" },
     { label: "Active Mobile Units", value: "65+ Vans", sub: "Fully equipped custom rigs", icon: Truck, color: "text-emerald-400" },
     { label: "Satisfied Drivers", value: "14,850+", sub: "Verified 5-star ratings", icon: Star, color: "text-amber-400" }
   ];

@@ -1,11 +1,11 @@
-// Centralized Business Configuration for Call Tyrone LLC
+// Centralized Business Configuration for Call Tyrone
 // Editable by client for easy maintenance without code changes.
 
 export const BUSINESS_CONFIG = {
-  name: "Call Tyrone LLC",
+  name: "Call Tyrone",
   logo: "/images/logo.png",
   tagline: "24/7 Mobile Tire & Roadside Assistance — 50-Mile Atlanta Radius",
-  shortDescription: "America's trusted 24/7 mobile tire change, flat repair, battery jump-start, lockout & emergency roadside assistance service across Greater Atlanta and all surrounding areas within a 50-mile radius. Call Tyrone LLC for rapid dispatch.",
+  shortDescription: "America's trusted 24/7 mobile tire change, flat repair, battery jump-start, lockout & emergency roadside assistance service across Greater Atlanta and all surrounding areas within a 50-mile radius. Call Tyrone for rapid dispatch.",
   phone: "(404) 482-2246",
   phoneRaw: "+14044822246",
   altPhone: "(404) 482-2246",
@@ -27,7 +27,7 @@ export const BUSINESS_CONFIG = {
     fullAddress: "100% Mobile Service Dispatch HQ — Atlanta, GA (50-Mile Radius Service Coverage)"
   },
   hours: "24 Hours / 7 Days a Week / 365 Days a Year",
-  dispatchTime: "15 - 30 Minutes Average Response",
+  dispatchTime: "Fastest Arrival Time",
   serviceRadiusMiles: 50,
   rating: 4.9,
   totalReviewsCount: "14,850+",
@@ -97,7 +97,7 @@ export const BUSINESS_CONFIG = {
       shortDesc: "Stranded with a flat spare or blown tire? We swap your damaged tire with your spare wheel right where you are.",
       fullDesc: "Our roadside service vehicles are equipped with heavy-duty commercial hydraulic jacks, impact wrenches, and certified safety equipment. Whether you are on I-85/I-75/I-285 or in your driveway, our technician swaps your flat tire with your spare safely within minutes.",
       startingPrice: "$99",
-      estimatedEta: "15-25 min",
+      estimatedEta: "Fastest Arrival Time",
       iconName: "Disc",
       image: "/images/FlatTireChange.png",
       features: ["On-site spare tire installation", "Lug nut torque verification to factory spec", "Spare tire pressure check & inflation", "Highway safety perimeter set up"],
@@ -109,11 +109,24 @@ export const BUSINESS_CONFIG = {
       shortDesc: "Dead battery leaving you stranded? Heavy-duty 12V/24V jump-start service for cars, SUVs, trucks, and hybrids.",
       fullDesc: "We provide high-amperage commercial jump-start power packs capable of starting completely drained batteries on all gas, diesel, and hybrid vehicles without damaging delicate vehicle electronics or ECUs.",
       startingPrice: "$99",
-      estimatedEta: "15-20 min",
+      estimatedEta: "Fastest Arrival Time",
       iconName: "Zap",
       image: "/images/jumpstart.png",
       features: ["Reverse-polarity surge protected boost", "Alternator & charging system diagnostic test", "Battery terminal cleaning & anti-corrosion spray", "12V and 24V commercial compatibility"],
       popular: true
+    },
+    {
+      id: "battery-replacement",
+      title: "New Battery Delivery & Installation",
+      shortDesc: "Brand new OEM, AGM & Auxiliary car batteries delivered and installed on-site with testing and warranty.",
+      fullDesc: "Stranded with a dead battery? Choose from 50+ fresh battery group sizes. Certified mobile technicians deliver and install brand new batteries right to your driveway or highway location. Includes complete starter and alternator diagnostic check.",
+      startingPrice: "Starts from $210",
+      estimatedEta: "Fastest Arrival Time",
+      iconName: "BatteryCharging",
+      image: "https://images.unsplash.com/photo-1558441719-7d0c326d953d?auto=format&fit=crop&w=1000&q=80",
+      features: ["50+ Battery sizes in stock", "Free on-site alternator & battery test", "Professional terminal cleaning & installation", "Old battery eco-friendly recycling"],
+      popular: true,
+      isBatteryPageLink: true
     },
     {
       id: "fuel-delivery",
@@ -121,7 +134,7 @@ export const BUSINESS_CONFIG = {
       shortDesc: "Ran out of gas or diesel on the road? We deliver premium gasoline or diesel fuel directly to you.",
       fullDesc: "Ran out of fuel on the freeway or stuck in traffic? Our emergency fuel delivery team delivers fresh 87/93 Octane Gasoline or Ultra-Low Sulfur Diesel straight to your vehicle so you can reach the nearest gas station safely.",
       startingPrice: "$99",
-      estimatedEta: "15-25 min",
+      estimatedEta: "Fastest Arrival Time",
       iconName: "Fuel",
       image: "/images/FuelDelivery.png",
       features: ["Regular, Premium, or Diesel fuel", "Up to 5 gallons delivered to site", "Prime fuel line restarting for diesel", "24/7 highway & neighborhood delivery"],
@@ -133,7 +146,7 @@ export const BUSINESS_CONFIG = {
       shortDesc: "Keys locked inside your car? Non-destructive professional lockout entry by certified roadside locksmiths.",
       fullDesc: "Locked out of your vehicle? Our technicians utilize damage-free specialized air-wedges, rubberized long-reach tools, and precision lockout equipment to safely unlock doors without scratching paint or damaging weather stripping.",
       startingPrice: "$99",
-      estimatedEta: "15-25 min",
+      estimatedEta: "Fastest Arrival Time",
       iconName: "Key",
       image: "/images/LockoutService.png",
       features: ["100% Damage-free guaranteed entry", "All makes & models including luxury vehicles", "Trunk lockout assistance", "Fast priority dispatch"],
@@ -145,7 +158,7 @@ export const BUSINESS_CONFIG = {
       shortDesc: "Professional on-site tire mounting and computerized wheel balancing brought right to your vehicle.",
       fullDesc: "No need to drive to a shop. Our mobile vans feature Italian computerized touchless tire changers and precision spin wheel balancers directly on-site.",
       startingPrice: "$35 per tire",
-      estimatedEta: "20-35 min",
+      estimatedEta: "Fastest Arrival Time",
       iconName: "CircleDot",
       image: "/images/MountBalance.png",
       features: ["Mobile computerized spin balancing", "Touchless rim mounting technology", "TPMS sensor recalibration", "Precision torque verification"],
@@ -157,10 +170,46 @@ export const BUSINESS_CONFIG = {
       shortDesc: "Standard base dispatch fee for mobile unit response, site arrival, and roadside assessment.",
       fullDesc: "Covers rapid mobile dispatch to your exact breakdown location, site safety evaluation, and complete vehicle assessment.",
       startingPrice: "$50",
-      estimatedEta: "15-30 min",
+      estimatedEta: "Fastest Arrival Time",
       iconName: "Truck",
       image: "/images/mobile-call-off.png",
       features: ["Direct unit dispatch to your location", "On-site vehicle diagnostic inspection", "Safety hazard perimeter setup", "Applicable toward full repair service"],
+      popular: true
+    },
+    {
+      id: "mobile-oil-change",
+      title: "Mobile Oil Change",
+      shortDesc: "Complete mobile synthetic oil and OEM filter replacement performed directly in your driveway or workplace.",
+      fullDesc: "No more waiting hours at an auto shop. Our certified technicians bring premium synthetic oil, OEM-grade filters, and specialized fluid extraction systems right to your home or office. Includes comprehensive multi-point vehicle inspection.",
+      startingPrice: "Starts at $99",
+      estimatedEta: "Fastest Arrival Time",
+      iconName: "Droplet",
+      image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1000&q=80",
+      features: ["Full synthetic motor oil & OEM filter", "Multi-point inspection & fluid level check", "Performed on-site at home or workplace", "Eco-friendly oil recycling & disposal"],
+      popular: true
+    },
+    {
+      id: "brake-pad-replacement",
+      title: "Brake Pad Replacement",
+      shortDesc: "Mobile on-site brake pad replacement. Eliminate squeaks, grinding, and stopping delay without visiting a shop.",
+      fullDesc: "Squeaking or grinding brakes? Our mobile mechanics arrive equipped to replace front or rear brake pads right in your driveway or parking spot with premium ceramic or semi-metallic pads. (Starting price is $180 and depends on brake pads and vehicle specifications).",
+      startingPrice: "Starts from $180*",
+      estimatedEta: "Fastest Arrival Time",
+      iconName: "Wrench",
+      image: "https://images.unsplash.com/photo-1600790142055-619df03207e6?auto=format&fit=crop&w=1000&q=80",
+      features: ["Premium ceramic or semi-metallic pads", "Caliper slide & pin lubrication", "Brake fluid & line safety inspection", "Starts from $180 (depends on brake pads)"],
+      popular: true
+    },
+    {
+      id: "brake-pads-and-rotors",
+      title: "Brake Pads + Rotors Replacement",
+      shortDesc: "Complete mobile brake overhaul with precision rotors and matching pads installed on-site.",
+      fullDesc: "Complete brake system renewal for smooth, vibration-free stopping. We replace worn rotors and install brand new matching brake pads directly at your location. (Starting price is $350 and varies depending on vehicle parts and rotor dimensions).",
+      startingPrice: "Starts from $350*",
+      estimatedEta: "Fastest Arrival Time",
+      iconName: "Disc",
+      image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80",
+      features: ["Brand new precision disc rotors", "Matching premium ceramic brake pads", "Caliper hardware cleaning & bed-in check", "Starts from $350 (varies based on parts)"],
       popular: true
     }
   ],
@@ -173,7 +222,7 @@ export const BUSINESS_CONFIG = {
       badge: "Most Requested",
       desc: "Roadside tire change with your spare wheel, lug nut torque verification & tire pressure tuning.",
       includes: [
-        "15-30 Min Rapid Dispatch",
+        "Fastest Arrival Time Dispatch",
         "On-site spare tire installation",
         "Lug nut torque spec check",
         "Highway safety perimeter setup",
@@ -187,7 +236,7 @@ export const BUSINESS_CONFIG = {
       badge: "Fastest Response",
       desc: "High-amperage commercial boost, battery health analysis, and alternator charging diagnostic.",
       includes: [
-        "15-20 Min Rapid Dispatch",
+        "Fastest Arrival Time Dispatch",
         "Heavy-duty surge protected boost",
         "Alternator health check",
         "Terminal corrosion cleaning",
@@ -201,7 +250,7 @@ export const BUSINESS_CONFIG = {
       badge: "24/7 Dispatch",
       desc: "Emergency roadside delivery of premium gasoline or diesel directly to your stranded location.",
       includes: [
-        "15-25 Min Rapid Dispatch",
+        "Fastest Arrival Time Dispatch",
         "Regular, Premium, or Diesel fuel",
         "Up to 5 gallons delivered to site",
         "Prime fuel line restarting for diesel",
@@ -215,7 +264,7 @@ export const BUSINESS_CONFIG = {
       badge: "100% Damage-Free",
       desc: "Non-destructive vehicle door & trunk unlocking by certified mobile locksmith technicians.",
       includes: [
-        "15-25 Min Rapid Dispatch",
+        "Fastest Arrival Time Dispatch",
         "100% Damage-free unlock guarantee",
         "All makes & models supported",
         "Trunk lockout entry assistance",
@@ -249,6 +298,48 @@ export const BUSINESS_CONFIG = {
         "Transparent upfront pricing",
         "Credited toward repair service"
       ]
+    },
+    {
+      name: "Mobile Oil Change",
+      price: "$99",
+      period: "starts at",
+      badge: "Driveway Service",
+      desc: "Full synthetic motor oil & OEM filter change completed at your home or workplace without shop delays.",
+      includes: [
+        "Fastest Arrival Time Dispatch",
+        "Full synthetic oil & new OEM filter",
+        "Multi-point safety check",
+        "Fluid top-offs included",
+        "No shop waiting required"
+      ]
+    },
+    {
+      name: "Brake Pad Replacement",
+      price: "$180*",
+      period: "starts from",
+      badge: "Mobile Brakes",
+      desc: "On-site front or rear brake pad replacement by certified mobile technicians. Price depends on brake pads & vehicle model.",
+      includes: [
+        "Fastest Arrival Time Dispatch",
+        "Premium ceramic / semi-metallic pads",
+        "Caliper slide & pin lubrication",
+        "Brake fluid & line inspection",
+        "Price depends on brake pads"
+      ]
+    },
+    {
+      name: "Brake Pads + Rotors",
+      price: "$350*",
+      period: "starts from",
+      badge: "Complete Brakes",
+      desc: "Full on-site brake overhaul with new rotors and matching brake pads. Eliminates shuddering and noise. Price varies by parts.",
+      includes: [
+        "Fastest Arrival Time Dispatch",
+        "Brand new precision brake rotors",
+        "Matching premium brake pads",
+        "Hardware cleaning & torque check",
+        "Price varies based on parts"
+      ]
     }
   ],
 
@@ -261,7 +352,7 @@ export const BUSINESS_CONFIG = {
       rating: 5,
       date: "2 days ago",
       service: "Flat Tire Change",
-      comment: "Blew a tire on I-85 North during rush hour in Downtown Atlanta. Technician Marcus from Call Tyrone LLC arrived in 14 minutes flat! Swapped my spare in under 10 minutes and checked my tire pressure. Lifesavers!",
+      comment: "Blew a tire on I-85 North during rush hour in Downtown Atlanta. Technician Marcus from Call Tyrone arrived in 14 minutes flat! Swapped my spare in under 10 minutes and checked my tire pressure. Lifesavers!",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
     },
     {
@@ -272,7 +363,7 @@ export const BUSINESS_CONFIG = {
       rating: 5,
       date: "1 week ago",
       service: "Mount & Balance",
-      comment: "Tesla tires don't come with a spare, so when I had a flat near Buckhead I called Call Tyrone LLC. They dispatched a van, mounted and balanced my tire right in my office parking space!",
+      comment: "Tesla tires don't come with a spare, so when I had a flat near Buckhead I called Call Tyrone. They dispatched a van, mounted and balanced my tire right in my office parking space!",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
     },
     {
@@ -283,7 +374,7 @@ export const BUSINESS_CONFIG = {
       rating: 5,
       date: "3 days ago",
       service: "Jump Start",
-      comment: "Stuck in summer heat at a shopping plaza with a dead battery. Call Tyrone LLC tech arrived with a heavy duty jump pack, tested the alternator, and got my family back on the road in 15 mins!",
+      comment: "Stuck in summer heat at a shopping plaza with a dead battery. Call Tyrone tech arrived with a heavy duty jump pack, tested the alternator, and got my family back on the road in 15 mins!",
       avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
     },
     {
@@ -294,15 +385,15 @@ export const BUSINESS_CONFIG = {
       rating: 5,
       date: "5 days ago",
       service: "Lockout Service",
-      comment: "Accidentally locked my keys and purse in the car late at night. Called Call Tyrone LLC emergency hotline at (404) 482-2246 and tech Alex unlocked the car in 2 minutes without a single scratch. Highly recommended!",
+      comment: "Accidentally locked my keys and purse in the car late at night. Called Call Tyrone emergency hotline at (404) 482-2246 and tech Alex unlocked the car in 2 minutes without a single scratch. Highly recommended!",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
     }
   ],
 
   faqs: [
     {
-      q: "How fast will a Call Tyrone LLC technician arrive at my location?",
-      a: "Our average emergency arrival time is between 15 to 30 minutes across Atlanta and all surrounding cities within our 50-mile service radius. Once you submit a request, our automated dispatch assigns the nearest active service unit."
+      q: "How fast will a Call Tyrone technician arrive at my location?",
+      a: "We guarantee the fastest arrival time across Atlanta and all surrounding cities within our 50-mile service radius. Once you submit a request, our automated dispatch assigns the nearest active service unit."
     },
     {
       q: "What areas are covered in the 50-mile Atlanta radius?",
@@ -318,11 +409,11 @@ export const BUSINESS_CONFIG = {
     },
     {
       q: "Are your prices transparent with no hidden fees?",
-      a: "Yes! Call Tyrone LLC provides upfront pricing estimates ($99 Flat Tire Change, Jump Start, Fuel Delivery, Lockout Service; $35 per tire Mount & Balance; $50 Call-Off Fee). What we quote is what you pay."
+      a: "Yes! Call Tyrone provides upfront pricing estimates ($99 Flat Tire Change, Jump Start, Fuel Delivery, Lockout Service; $35 per tire Mount & Balance; $50 Call-Off Fee). What we quote is what you pay."
     },
     {
       q: "Do you service electric vehicles (EVs) like Tesla, Rivian, and Lucid?",
-      a: "Yes! All Call Tyrone LLC technicians are trained and certified in low-profile EV tires, puck-jacking points for battery protection, specialized torque specifications, and high-amperage low-voltage battery service."
+      a: "Yes! All Call Tyrone technicians are trained and certified in low-profile EV tires, puck-jacking points for battery protection, specialized torque specifications, and high-amperage low-voltage battery service."
     },
     {
       q: "What payment methods do you accept roadside?",
@@ -340,7 +431,7 @@ export const BUSINESS_CONFIG = {
     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",
     rating: "4.98 ★ (1,420+ Services Completed)",
     phone: "(404) 482-2246",
-    unit: "Call Tyrone LLC Unit #408",
+    unit: "Call Tyrone Unit #408",
     vehicle: "2024 Ford Transit High-Roof Custom Service Van",
     licensePlate: "GA-TYR408",
     equipment: ["Touchless Tire Changer", "Spin Balancer", "5000lb Hydraulic Jack", "Commercial Jump Pack", "Patch/Plug Kit"]

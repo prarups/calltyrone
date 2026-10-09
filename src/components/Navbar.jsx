@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Disc, PhoneCall, Navigation, Menu, X, Activity, ChevronRight } from 'lucide-react';
+import { PhoneCall, Menu, X, ChevronRight, Calendar } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
-export default function Navbar({ onNavigateSection, onOpenTracking, onRequestService, activeSection, activeRequestId }) {
+export default function Navbar({ onNavigateSection, onRequestService, onOpenBatteryService, activeSection, currentView }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -17,8 +17,9 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
   const navLinks = [
     { name: 'Home', id: 'home' },
     { name: 'Services', id: 'services' },
+    { name: 'Batteries', id: 'battery-service' },
     { name: 'How It Works', id: 'how-it-works' },
-    { name: 'Service Areas', id: 'service-areas' },
+    { name: 'Areas', id: 'service-areas' },
     { name: 'About', id: 'about' },
     { name: 'Pricing', id: 'pricing' },
     { name: 'Reviews', id: 'reviews' },
@@ -28,179 +29,159 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
 
   const handleLinkClick = (id) => {
     setMobileMenuOpen(false);
+    if (id === 'battery-service' && onOpenBatteryService) {
+      onOpenBatteryService();
+      return;
+    }
     onNavigateSection(id);
   };
 
   return (
     <header className={`sticky top-0 z-40 transition-all duration-300 ${
       isScrolled 
-        ? 'glass-nav shadow-2xl border-b border-slate-800/90 py-2.5' 
-        : 'bg-slate-950/95 py-3.5 border-b border-slate-800/50'
+        ? 'glass-nav shadow-lg border-b border-slate-800/90 py-2' 
+        : 'bg-slate-950/95 py-2.5 border-b border-slate-800/60'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-2 sm:gap-4 flex-nowrap">
           
-          {/* Brand Logo */}
+          {/* Brand Logo - Compact Single Line */}
           <button
             onClick={() => handleLinkClick('home')}
-            className="flex items-center gap-3.5 group text-left focus:outline-none shrink-0 cursor-pointer"
+            className="flex items-center gap-2 sm:gap-2.5 group text-left focus:outline-none shrink-0 cursor-pointer whitespace-nowrap"
           >
-            {/* Circular Styled Logo Container */}
-            <div className="relative flex items-center justify-center shrink-0">
-              {/* Circular Glowing Aura */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-indigo-500 to-amber-400 rounded-full blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              {/* Circular Ring Frame */}
-              <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 via-indigo-500 to-amber-400 shadow-xl flex items-center justify-center bg-slate-950">
-                <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden p-0.5 border border-slate-800">
-                  <img 
-                    src={BUSINESS_CONFIG.logo} 
-                    alt={BUSINESS_CONFIG.name} 
-                    className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-300"
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                </div>
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full p-[1.5px] bg-gradient-to-tr from-blue-500 via-indigo-500 to-amber-400 shadow flex items-center justify-center bg-slate-950 shrink-0">
+              <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center overflow-hidden p-0.5 border border-slate-800">
+                <img 
+                  src={BUSINESS_CONFIG.logo} 
+                  alt={BUSINESS_CONFIG.name} 
+                  className="w-full h-full object-cover rounded-full"
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
               </div>
-
-              {/* Live Active Status Pulse Badge */}
-              <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-slate-950"></span>
-              </span>
             </div>
 
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-heading font-black text-xl sm:text-2xl tracking-tight text-white uppercase leading-none group-hover:text-blue-400 transition-colors">
-                  CALL <span className="text-blue-500">TYRONE</span>
-                </span>
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white border border-blue-400/40 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
-                  24/7
-                </span>
-              </div>
-              <span className="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-0.5 hidden sm:block">
-                Mobile Tire & Roadside Dispatch
+            <div className="flex items-center gap-1.5">
+              <span className="font-heading font-black text-lg sm:text-xl tracking-tight text-white uppercase leading-none group-hover:text-blue-400 transition-colors whitespace-nowrap">
+                CALL <span className="text-blue-500">TYRONE</span>
+              </span>
+              <span className="bg-blue-600/30 text-blue-300 border border-blue-500/40 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider whitespace-nowrap">
+                24/7
               </span>
             </div>
           </button>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden xl:flex items-center gap-5">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => handleLinkClick(link.id)}
-                className={`text-xs font-bold uppercase tracking-wider transition-all hover:text-blue-400 py-1 ${
-                  activeSection === link.id
-                    ? 'text-blue-500 font-black border-b-2 border-blue-500'
-                    : 'text-slate-300'
-                }`}
-              >
-                {link.name}
-              </button>
-            ))}
+          {/* Desktop Nav Links - Single Line Compact */}
+          <nav className="hidden xl:flex items-center gap-1 flex-nowrap shrink-0">
+            {navLinks.map((link) => {
+              const isActive = currentView === 'battery-service' 
+                ? link.id === 'battery-service' 
+                : (currentView === 'main' && activeSection === link.id);
+              const isBattery = link.id === 'battery-service';
+
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => handleLinkClick(link.id)}
+                  className={`text-xs font-bold uppercase tracking-wider transition-all px-2.5 py-1 rounded-md whitespace-nowrap cursor-pointer shrink-0 ${
+                    isActive
+                      ? 'text-blue-400 bg-blue-600/15 border border-blue-500/30'
+                      : isBattery
+                        ? 'text-amber-400 hover:text-amber-300 hover:bg-amber-500/10'
+                        : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
+                  }`}
+                >
+                  {link.name}
+                </button>
+              );
+            })}
           </nav>
 
-          {/* Right Action CTAs */}
-          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
-            
-            {/* Live Track Service Button (Disabled as requested) */}
-            {/*
-            <button
-              onClick={onOpenTracking}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all border ${
-                activeRequestId
-                  ? 'bg-amber-500/15 text-amber-300 border-amber-500/50 shadow-lg shadow-amber-950/40 animate-pulse'
-                  : 'bg-slate-900 hover:bg-slate-800 text-slate-200 border-slate-700'
-              }`}
-            >
-              <Activity className="w-3.5 h-3.5 text-amber-400" />
-              <span>{activeRequestId ? `Track #${activeRequestId}` : 'Track Service'}</span>
-            </button>
-            */}
-
-            {/* Direct Call Button */}
+          {/* Desktop Right Action CTAs - Small Single Line */}
+          <div className="hidden xl:flex items-center gap-2 shrink-0 flex-nowrap">
+            {/* Phone Button */}
             <a
               href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-              className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-100 border border-slate-700 px-3.5 py-2 rounded-xl text-xs font-black transition-all hover:border-blue-500/50 shadow-md"
+              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 px-2.5 py-1 rounded-md text-xs font-bold transition-all whitespace-nowrap shrink-0 cursor-pointer"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-blue-500" />
+              <PhoneCall className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
               <span>{BUSINESS_CONFIG.phone}</span>
             </a>
 
-            {/* Request Service CTA */}
+            {/* Book Now Button */}
             <button
               onClick={onRequestService}
-              className="flex items-center gap-2 bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg shadow-blue-900/50 hover:shadow-blue-600/40 transition-all transform active:scale-95"
+              className="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-3 py-1 rounded-md text-xs uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap shrink-0 shadow-sm"
             >
-              <Navigation className="w-3.5 h-3.5" />
-              <span>Request Tech</span>
+              <Calendar className="w-3.5 h-3.5 stroke-[2.5] shrink-0" />
+              <span>Book Now</span>
             </button>
           </div>
 
-          {/* Mobile Actions Right */}
-          <div className="flex items-center gap-2 xl:hidden">
-            {/* Mobile Track Button (Disabled as requested) */}
-            {/*
+          {/* Mobile Right Actions - Small Single Line */}
+          <div className="flex items-center gap-2 xl:hidden shrink-0 flex-nowrap">
+            {/* Small Single-Line Book Now Button */}
             <button
-              onClick={onOpenTracking}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-black bg-slate-900 text-amber-400 border border-amber-500/40"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onRequestService();
+              }}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-black bg-amber-500 hover:bg-amber-400 text-slate-950 uppercase tracking-wider active:scale-95 transition-all cursor-pointer whitespace-nowrap shrink-0 shadow-sm"
+              aria-label="Book Now"
             >
-              <Activity className="w-3.5 h-3.5 text-amber-400" />
-              <span>Track</span>
+              <Calendar className="w-3 h-3 stroke-[2.5] text-slate-950 shrink-0" />
+              <span>Book Now</span>
             </button>
-            */}
 
+            {/* Compact Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-200 hover:text-white bg-slate-900 rounded-lg border border-slate-800 focus:outline-none"
+              className="p-1.5 text-slate-200 hover:text-white bg-slate-900 hover:bg-slate-800 rounded-md border border-slate-800 focus:outline-none cursor-pointer shrink-0 transition-all active:scale-95"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-blue-500" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-blue-400" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu - Clean Single-Line Items */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-slate-950/98 backdrop-blur-2xl border-b border-slate-800 px-4 pt-4 pb-6 mt-2 space-y-4 shadow-2xl animate-in slide-in-from-top-4 duration-200">
+        <div className="xl:hidden bg-slate-950/98 backdrop-blur-2xl border-b border-slate-800 px-4 pt-3 pb-5 mt-2 space-y-3 shadow-2xl animate-in slide-in-from-top-2 duration-150">
           
-          <div className="grid grid-cols-2 gap-2 pb-4 border-b border-slate-800">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => handleLinkClick(link.id)}
-                className="flex items-center justify-between py-2.5 px-3 text-left text-xs font-bold uppercase tracking-wider text-slate-200 hover:bg-slate-900 rounded-xl hover:text-blue-400 transition-colors border border-transparent hover:border-slate-800"
-              >
-                <span>{link.name}</span>
-                <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-              </button>
-            ))}
+          <div className="grid grid-cols-2 gap-1.5 pb-3 border-b border-slate-800">
+            {navLinks.map((link) => {
+              const isActive = currentView === 'battery-service' 
+                ? link.id === 'battery-service' 
+                : (currentView === 'main' && activeSection === link.id);
+
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => handleLinkClick(link.id)}
+                  className={`flex items-center justify-between py-2 px-2.5 text-left text-xs font-bold uppercase tracking-wider rounded-lg transition-all border cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? 'bg-blue-600/20 text-blue-400 border-blue-500/40'
+                      : link.id === 'battery-service'
+                        ? 'bg-amber-500/10 text-amber-300 border-amber-500/30'
+                        : 'text-slate-200 hover:text-white bg-slate-900/60 hover:bg-slate-800 rounded-lg border-slate-850'
+                  }`}
+                >
+                  <span className="truncate">{link.name}</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                </button>
+              );
+            })}
           </div>
 
-          <div className="flex flex-col gap-2.5 pt-1">
-            {/* Mobile Drawer Track Button (Disabled as requested) */}
-            {/*
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenTracking();
-              }}
-              className="w-full flex items-center justify-center gap-2 bg-amber-500/10 border border-amber-500/40 text-amber-300 py-3 rounded-xl font-black text-xs uppercase tracking-wider shadow-md"
-            >
-              <Activity className="w-4 h-4 text-amber-400" />
-              <span>{activeRequestId ? `Track Active Request (#${activeRequestId})` : 'Live GPS Service Tracking'}</span>
-            </button>
-            */}
-
+          <div className="flex flex-col gap-2 pt-0.5">
             <a
               href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-              className="w-full flex items-center justify-center gap-2 bg-slate-900 border border-slate-700 text-white py-3 rounded-xl font-black text-xs uppercase tracking-wider"
+              className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white py-2 px-3 rounded-lg font-bold text-xs uppercase tracking-wider whitespace-nowrap"
             >
-              <PhoneCall className="w-4 h-4 text-blue-500" />
-              <span>Call Emergency Hotline ({BUSINESS_CONFIG.phone})</span>
+              <PhoneCall className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span>Call ({BUSINESS_CONFIG.phone})</span>
             </a>
 
             <button
@@ -208,10 +189,10 @@ export default function Navbar({ onNavigateSection, onOpenTracking, onRequestSer
                 setMobileMenuOpen(false);
                 onRequestService();
               }}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-wider shadow-xl shadow-blue-900/50"
+              className="w-full flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 py-2.5 px-3 rounded-lg font-black text-xs uppercase tracking-wider shadow-md whitespace-nowrap cursor-pointer"
             >
-              <Navigation className="w-4 h-4" />
-              <span>Request Roadside Assistance Now</span>
+              <Calendar className="w-3.5 h-3.5 stroke-[2.5] shrink-0" />
+              <span>Book Appointment Now</span>
             </button>
           </div>
 

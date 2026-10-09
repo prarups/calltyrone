@@ -4,15 +4,17 @@ import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
   const reviews = BUSINESS_CONFIG.testimonials;
 
-  // Auto-slide reviews continuously every 5 seconds
+  // Auto-slide reviews continuously every 5 seconds when playing
   useEffect(() => {
+    if (!isPlaying) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % reviews.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [reviews.length]);
+  }, [isPlaying, reviews.length]);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length);

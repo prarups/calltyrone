@@ -92,14 +92,14 @@ export default function Hero({ onRequestService, onOpenTracking }) {
 
             {/* Subtitle */}
             <p className="text-xs sm:text-sm text-slate-200 max-w-xl font-normal leading-relaxed drop-shadow-md">
-              Stranded on the highway, at home, or at work? <strong className="text-white font-bold underline decoration-blue-500/60">Call Tyrone LLC</strong> comes directly to your location with certified technicians, brand new tires, computerized balancers, and commercial jump packs.
+              Stranded on the highway, at home, or at work? <strong className="text-white font-bold underline decoration-blue-500/60">Call Tyrone</strong> comes directly to your location with certified technicians, brand new tires, computerized balancers, and commercial jump packs.
             </p>
 
             {/* Feature Checkmarks */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-100 pt-0.5 drop-shadow">
               <div className="flex items-center gap-2 bg-slate-950/70 px-2.5 py-1.5 rounded-lg border border-slate-800/80 backdrop-blur-sm">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                <span>15-30 Min Average Arrival</span>
+                <span>Fastest Arrival Time</span>
               </div>
               <div className="flex items-center gap-2 bg-slate-950/70 px-2.5 py-1.5 rounded-lg border border-slate-800/80 backdrop-blur-sm">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />

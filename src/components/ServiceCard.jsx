@@ -112,9 +112,11 @@ export default function ServiceCard({ service, onSelectService }) {
           <div className="pt-4 border-t border-slate-800/80">
             <button
               onClick={() => onSelectService(service.id)}
-              className="w-full flex items-center justify-center gap-2 bg-slate-900 group-hover:rainbow-glow-border group-hover:text-white text-slate-200 border border-slate-800 group-hover:border-transparent text-xs font-extrabold uppercase tracking-wider py-3 rounded-xl transition-all shadow-md group-hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]"
+              className="w-full flex items-center justify-center gap-2 bg-slate-900 group-hover:rainbow-glow-border group-hover:text-white text-slate-200 border border-slate-800 group-hover:border-transparent text-xs font-extrabold uppercase tracking-wider py-3 rounded-xl transition-all shadow-md group-hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer"
             >
-              <span className="relative z-10 group-hover:font-black">Get Help Now</span>
+              <span className="relative z-10 group-hover:font-black">
+                {service.id === 'battery-replacement' ? 'Select Battery & Order' : 'Get Help Now'}
+              </span>
               <ArrowRight className="w-4 h-4 text-blue-500 group-hover:text-white group-hover:translate-x-1.5 transition-transform relative z-10" />
             </button>
           </div>

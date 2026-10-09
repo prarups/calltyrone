@@ -6,7 +6,7 @@ export default function WhyChooseUs() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const stats = [
-    { label: "AVG. ARRIVAL", value: "15-30 MIN", icon: Clock, color: "text-amber-400" },
+    { label: "ARRIVAL TIME", value: "FASTEST ARRIVAL TIME", icon: Clock, color: "text-amber-400" },
     { label: "DIRECT DISPATCH", value: "24/7/365", icon: Zap, color: "text-blue-400" },
     { label: "CUSTOMER RATING", value: "4.9 / 5.0 ★", icon: Star, color: "text-amber-400" },
     { label: "SATISFACTION", value: "100% GUARANTEED", icon: ShieldCheck, color: "text-green-400" }

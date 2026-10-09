@@ -25,14 +25,14 @@ export default function HowItWorks({ onRequestService }) {
       title: "Instant ETA & Tech Dispatch",
       desc: "Our 24/7 dispatch team confirms your location, provides a direct ETA, and dispatches the nearest mobile unit immediately.",
       icon: Truck,
-      badge: "15-30 Min ETA"
+      badge: "Fastest Arrival Time"
     },
     {
       num: "04",
       title: "On-Site Repair Service",
       desc: "Certified technician arrives, sets up safety perimeter strobes, and performs tire change, patch, battery replacement, or unlock.",
       icon: CheckCircle2,
-      badge: "15-20 Min Work"
+      badge: "Rapid On-Site Work"
     },
     {
       num: "05",

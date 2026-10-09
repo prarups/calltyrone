@@ -47,9 +47,9 @@ export default function ServiceAreas({ onRequestService }) {
         zip: cleanZip,
         zoneName: zoneName,
         message: `GUARANTEED 24/7 COVERAGE FOR ZIP ${cleanZip}`,
-        subtext: `Call Tyrone LLC provides rapid mobile dispatch service across ${zoneName}.`,
+        subtext: `Call Tyrone provides rapid mobile dispatch service across ${zoneName}.`,
         units: `${unitsCount} active mobile units currently patrolling this sector`,
-        eta: "15 to 25 minutes average dispatch arrival time"
+        eta: "Fastest arrival time dispatch guarantee"
       });
     } else {
       setSearchResult({

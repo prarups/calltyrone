@@ -12,7 +12,7 @@ export default function EmergencyBar() {
       <span className="text-blue-400 font-black">•</span>
       <span className="flex items-center gap-2 text-white">
         <Zap className="w-4 h-4 text-amber-400 shrink-0 animate-pulse" />
-        Average Arrival Time: <strong className="text-yellow-300 underline font-black">{BUSINESS_CONFIG.dispatchTime}</strong>
+        <strong className="text-yellow-300 underline font-black">{BUSINESS_CONFIG.dispatchTime} Guaranteed</strong>
       </span>
       <span className="text-blue-400 font-black">•</span>
       <a

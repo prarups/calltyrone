@@ -1,41 +1,32 @@
 import React from 'react';
-import { PhoneCall, Navigation, Activity } from 'lucide-react';
+import { PhoneCall, Calendar } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
-export default function MobileActionBar({ onRequestService, onOpenTracking, activeRequestId }) {
+export default function MobileActionBar({ onRequestService }) {
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 p-2.5 shadow-2xl">
-      <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-2xl border-t border-slate-800/90 px-3 py-2.5 shadow-2xl">
+      <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto">
         
         {/* Call Hotline */}
         <a
           href={`tel:${BUSINESS_CONFIG.phoneRaw}`}
-          className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-slate-900 border border-blue-500/40 text-blue-400 active:scale-95 transition-transform"
+          className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-full bg-slate-900/95 border border-slate-700/80 text-white active:scale-95 transition-all shadow-md group cursor-pointer"
         >
-          <PhoneCall className="w-5 h-5 text-blue-500 mb-0.5 animate-pulse" />
-          <span className="text-[10px] font-black uppercase tracking-wider text-white">Call 24/7</span>
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <PhoneCall className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-black uppercase tracking-wider text-slate-100">Call 24/7</span>
         </a>
 
-        {/* Track Service (Disabled as requested) */}
-        {/*
-        <button
-          onClick={onOpenTracking}
-          className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 active:scale-95 transition-transform"
-        >
-          <Activity className="w-5 h-5 text-amber-400 mb-0.5" />
-          <span className="text-[10px] font-black uppercase tracking-wider text-amber-300">
-            {activeRequestId ? `Track #${activeRequestId.slice(-4)}` : 'Track Service'}
-          </span>
-        </button>
-        */}
-
-        {/* Request Service */}
+        {/* Book Now */}
         <button
           onClick={onRequestService}
-          className="flex flex-col items-center justify-center py-2 px-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-900/40 active:scale-95 transition-transform"
+          className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black shadow-lg shadow-amber-500/25 active:scale-95 transition-all cursor-pointer border border-amber-300/50"
         >
-          <Navigation className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px] font-black uppercase tracking-wider">Request Tech</span>
+          <Calendar className="w-4 h-4 stroke-[2.5]" />
+          <span className="text-xs font-black uppercase tracking-wider">Book Now</span>
         </button>
 
       </div>
