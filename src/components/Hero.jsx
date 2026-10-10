@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { PhoneCall, Navigation, ShieldCheck, Clock, MapPin, Star, Award, CheckCircle2, ArrowRight, Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
+import { PhoneCall, Navigation, ShieldCheck, CheckCircle2, ArrowRight, Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
-export default function Hero({ onRequestService, onOpenTracking }) {
+export default function Hero({ onRequestService }) {
   // Vibrant, high-definition authentic USA roadside assistance images
   const heroSlides = [
     {
@@ -212,8 +212,11 @@ export default function Hero({ onRequestService, onOpenTracking }) {
 
                 {/* Bright Crisp Image */}
                 <img 
-                  src="/images/homepage.png" 
+                  src="/images/homepage.jpg" 
                   alt="Call Tyrone 24/7 Roadside Service" 
+                  fetchPriority="high"
+                  width="448"
+                  height="360"
                   className="w-full max-w-md mx-auto h-auto max-h-[360px] object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500 ease-out shadow-lg block"
                 />
 

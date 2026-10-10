@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Navigation, Clock, MapPin, Share2, RefreshCw, XCircle, PhoneCall, CheckCircle2, AlertTriangle, ShieldCheck, ArrowLeft, Copy, Check, Search } from 'lucide-react';
+import { Navigation, Clock, MapPin, Share2, RefreshCw, XCircle, AlertTriangle, ShieldCheck, ArrowLeft, Check, Search } from 'lucide-react';
 import TrackingMap from './TrackingMap';
-import StatusTimeline, { LIFECYCLE_STAGES } from './StatusTimeline';
+import StatusTimeline from './StatusTimeline';
+import { LIFECYCLE_STAGES } from '../config/lifecycleStages';
 import TechnicianCard from './TechnicianCard';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Navigation, MapPin, Truck, CheckCircle2, Shield, ArrowRight } from 'lucide-react';
-import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function HowItWorks({ onRequestService }) {
   const [activeStep, setActiveStep] = useState(0);

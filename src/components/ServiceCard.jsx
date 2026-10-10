@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Clock, Disc, Wrench, CircleDot, Truck, Zap, BatteryCharging, Key, Fuel, Droplet, ShieldAlert, CheckCircle2, ArrowRight, Navigation, Moon } from 'lucide-react';
 
 const ICON_MAP = {
@@ -17,16 +17,12 @@ const ICON_MAP = {
 const DEFAULT_FALLBACK_IMAGE = "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=1200&q=80";
 
 export default function ServiceCard({ service, onSelectService }) {
-  const [imgSrc, setImgSrc] = useState(service.image);
   const IconComponent = ICON_MAP[service.iconName] || Disc;
 
-  useEffect(() => {
-    setImgSrc(service.image);
-  }, [service.image]);
-
-  const handleImageError = () => {
-    // If specific image fails, fallback to default high-definition roadside image
-    setImgSrc(DEFAULT_FALLBACK_IMAGE);
+  const handleImageError = (e) => {
+    if (e.currentTarget.src !== DEFAULT_FALLBACK_IMAGE) {
+      e.currentTarget.src = DEFAULT_FALLBACK_IMAGE;
+    }
   };
 
   return (
@@ -36,11 +32,14 @@ export default function ServiceCard({ service, onSelectService }) {
         {/* Service Image with overlay badges */}
         <div className="relative h-48 sm:h-52 overflow-hidden bg-slate-950">
           <img
-            src={imgSrc}
+            src={service.image}
             alt={service.title}
             onError={handleImageError}
+            width="400"
+            height="208"
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-105 contrast-105 saturate-110"
             loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
 

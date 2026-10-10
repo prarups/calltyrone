@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ServiceCard from './ServiceCard';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
-import { ShieldCheck, Disc, Zap, Truck, Wrench } from 'lucide-react';
+import { ShieldCheck, Disc, Zap, Wrench } from 'lucide-react';
 
 export default function Services({ onSelectService }) {
   const [filter, setFilter] = useState('all');

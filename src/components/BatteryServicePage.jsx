@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, BatteryCharging, CheckCircle2, ShieldCheck, Zap, Phone, 
-  MapPin, Car, User, Clock, Calendar, Send, Search, AlertTriangle, Disc, Wrench
+  MapPin, Car, User, Clock, Calendar, Search, AlertTriangle, Wrench
 } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 import { BATTERY_CATALOG, BATTERY_CATEGORIES } from '../config/batteryConfig';
@@ -13,6 +13,8 @@ const getTodayDateString = () => {
   const day = String(now.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
+
+const generateBatteryRequestId = () => `BAT-${Date.now().toString().slice(-5)}`;
 
 const getCurrentTimeString = () => {
   const now = new Date();
@@ -162,7 +164,7 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
       console.warn("Battery FormSubmit error:", err);
     }
 
-    const generatedId = `BAT-${Math.floor(10000 + Math.random() * 90000)}`;
+    const generatedId = generateBatteryRequestId();
     const newRequest = {
       id: generatedId,
       type: 'battery',

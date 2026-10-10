@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MessageSquare, Star, Truck, ShieldCheck, Wrench, Check, Send, X } from 'lucide-react';
+import { Phone, MessageSquare, Star, Truck, Check, Send, X } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function TechnicianCard({ technician = BUSINESS_CONFIG.demoTechnician }) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Truck, Users, Award, CheckCircle2, Sparkles, Zap, Clock, Star } from 'lucide-react';
+import { Truck, CheckCircle2, Sparkles, Zap, Clock, Star } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function About() {

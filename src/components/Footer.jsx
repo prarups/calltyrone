@@ -1,8 +1,8 @@
 import React from 'react';
-import { Disc, PhoneCall, MapPin } from 'lucide-react';
+import { PhoneCall, MapPin } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
-export default function Footer({ onRequestService, onOpenTracking, onOpenDownloadGuide, onOpenBatteryService }) {
+export default function Footer({ onRequestService, onOpenDownloadGuide, onOpenBatteryService }) {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 text-slate-400 pt-12 pb-24 lg:pb-12 text-xs relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">

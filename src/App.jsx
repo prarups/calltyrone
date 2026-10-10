@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import EmergencyBar from './components/EmergencyBar';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,11 +14,9 @@ import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import MobileActionBar from './components/MobileActionBar';
-import TrackingPage from './components/TrackingPage';
-import BatteryServicePage from './components/BatteryServicePage';
-import DownloadGuideModal from './components/DownloadGuideModal';
-import { X } from 'lucide-react';
-import { BUSINESS_CONFIG } from './config/businessConfig';
+
+const BatteryServicePage = lazy(() => import('./components/BatteryServicePage'));
+const DownloadGuideModal = lazy(() => import('./components/DownloadGuideModal'));
 
 export default function App() {
   const [currentView, setCurrentView] = useState('main'); // 'main' | 'battery-service' | 'tracking'
@@ -123,13 +121,15 @@ export default function App() {
 
       {/* Main View vs Dedicated Battery Service Page */}
       {currentView === 'battery-service' ? (
-        <BatteryServicePage
-          onBackToHome={() => {
-            setCurrentView('main');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          onRequestSubmitted={handleRequestSubmitted}
-        />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-slate-950 text-blue-400 font-bold">Loading Battery Center...</div>}>
+          <BatteryServicePage
+            onBackToHome={() => {
+              setCurrentView('main');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onRequestSubmitted={handleRequestSubmitted}
+          />
+        </Suspense>
       ) : (
         <main className="space-y-0">
           {/* Hero Section */}
@@ -207,10 +207,14 @@ export default function App() {
       )}
 
       {/* Modal: Download Emergency Service Guide */}
-      <DownloadGuideModal
-        isOpen={isDownloadGuideOpen}
-        onClose={() => setIsDownloadGuideOpen(false)}
-      />
+      {isDownloadGuideOpen && (
+        <Suspense fallback={null}>
+          <DownloadGuideModal
+            isOpen={isDownloadGuideOpen}
+            onClose={() => setIsDownloadGuideOpen(false)}
+          />
+        </Suspense>
+      )}
 
     </div>
   );

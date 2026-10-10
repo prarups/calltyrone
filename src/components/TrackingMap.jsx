@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { MapPin, Truck, RefreshCw, ZoomIn, ZoomOut, Layers, Compass } from 'lucide-react';
+import { MapPin, Truck, RefreshCw, Layers, Compass } from 'lucide-react';
 
-export default function TrackingMap({ techProgress, activeStageIndex, onRefreshLocation }) {
+export default function TrackingMap({ techProgress, activeStageIndex: _activeStageIndex, onRefreshLocation }) {
   const [mapStyle, setMapStyle] = useState('dark');
   const [isRefreshing, setIsRefreshing] = useState(false);
 

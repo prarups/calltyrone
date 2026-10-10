@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MapPin, Navigation, Car, Phone, User, Disc, CheckCircle2, ShieldCheck, X, Send, Calendar, Clock, Zap } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Car, Phone, User, Disc, CheckCircle2, ShieldCheck, X, Calendar, Clock, Zap } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 const getTodayDateString = () => {
@@ -17,7 +17,7 @@ const getCurrentTimeString = () => {
   return `${hours}:${minutes}`;
 };
 
-export default function ServiceRequestForm({ preselectedService, onRequestSubmitted, onCancel, onClose, isModal = false }) {
+export default function ServiceRequestForm({ preselectedService, onRequestSubmitted, onCancel, onClose, isModal: _isModal = false }) {
   const [serviceTiming, setServiceTiming] = useState('asap'); // 'asap' | 'scheduled'
   const [formData, setFormData] = useState({
     fullName: '',
@@ -32,15 +32,15 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
     notes: ''
   });
 
+  const [prevPreselectedService, setPrevPreselectedService] = useState(preselectedService);
+  if (preselectedService && preselectedService !== prevPreselectedService) {
+    setPrevPreselectedService(preselectedService);
+    setFormData(prev => ({ ...prev, serviceId: preselectedService }));
+  }
+
   const [isLocating, setIsLocating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRequest, setSubmittedRequest] = useState(null);
-
-  useEffect(() => {
-    if (preselectedService) {
-      setFormData(prev => ({ ...prev, serviceId: preselectedService }));
-    }
-  }, [preselectedService]);
 
   const formatPhoneNumber = (value) => {
     if (!value) return value;
@@ -98,7 +98,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
               locationUrl: liveMapsUrl
             }));
           }
-        } catch (err) {
+        } catch {
           setFormData(prev => ({
             ...prev,
             location: `GPS (${latitude.toFixed(5)}, ${longitude.toFixed(5)})`,

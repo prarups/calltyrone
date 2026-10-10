@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Search, CheckCircle2, PhoneCall, AlertCircle, Compass, Truck, Sparkles, Navigation, ShieldAlert } from 'lucide-react';
+import { MapPin, Search, CheckCircle2, Compass, Truck, Sparkles, Navigation, ShieldAlert } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 
 export default function ServiceAreas({ onRequestService }) {
@@ -39,7 +39,7 @@ export default function ServiceAreas({ onRequestService }) {
     );
 
     if (isCovered) {
-      const unitsCount = matchedZone ? matchedZone.units : Math.floor(12 + Math.random() * 8);
+      const unitsCount = matchedZone ? matchedZone.units : 14;
       const zoneName = matchedZone ? matchedZone.name : `Greater Atlanta Service Area (${cleanZip})`;
       
       setSearchResult({
