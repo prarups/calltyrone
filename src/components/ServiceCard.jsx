@@ -14,7 +14,7 @@ const ICON_MAP = {
   ShieldAlert
 };
 
-const DEFAULT_FALLBACK_IMAGE = "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=1200&q=80";
+const DEFAULT_FALLBACK_IMAGE = "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=600&q=70";
 
 export default function ServiceCard({ service, onSelectService }) {
   const IconComponent = ICON_MAP[service.iconName] || Disc;

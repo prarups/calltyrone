@@ -3,7 +3,7 @@
 
 export const BUSINESS_CONFIG = {
   name: "Call Tyrone",
-  logo: "/images/logo.png",
+  logo: "./images/logo.png",
   tagline: "24/7 Mobile Tire & Roadside Assistance — 50-Mile Atlanta Radius",
   shortDescription: "America's trusted 24/7 mobile tire change, flat repair, battery jump-start, lockout & emergency roadside assistance service across Greater Atlanta and all surrounding areas within a 50-mile radius. Call Tyrone for rapid dispatch.",
   phone: "(404) 482-2246",
@@ -99,7 +99,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "$99",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Disc",
-      image: "/images/FlatTireChange.jpg",
+      image: "./images/FlatTireChange.jpg",
       features: ["On-site spare tire installation", "Lug nut torque verification to factory spec", "Spare tire pressure check & inflation", "Highway safety perimeter set up"],
       popular: true
     },
@@ -111,7 +111,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "$99",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Zap",
-      image: "/images/jumpstart.jpg",
+      image: "./images/jumpstart.jpg",
       features: ["Reverse-polarity surge protected boost", "Alternator & charging system diagnostic test", "Battery terminal cleaning & anti-corrosion spray", "12V and 24V commercial compatibility"],
       popular: true
     },
@@ -123,7 +123,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "Starts from $210",
       estimatedEta: "Fastest Arrival Time",
       iconName: "BatteryCharging",
-      image: "/images/newbattery.jpg",
+      image: "./images/newbattery.jpg",
       features: ["50+ Battery sizes in stock", "Free on-site alternator & battery test", "Professional terminal cleaning & installation", "Old battery eco-friendly recycling"],
       popular: true,
       isBatteryPageLink: true
@@ -136,7 +136,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "$99",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Fuel",
-      image: "/images/FuelDelivery.jpg",
+      image: "./images/FuelDelivery.jpg",
       features: ["Regular, Premium, or Diesel fuel", "Up to 5 gallons delivered to site", "Prime fuel line restarting for diesel", "24/7 highway & neighborhood delivery"],
       popular: true
     },
@@ -148,7 +148,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "$99",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Key",
-      image: "/images/LockoutService.jpg",
+      image: "./images/LockoutService.jpg",
       features: ["100% Damage-free guaranteed entry", "All makes & models including luxury vehicles", "Trunk lockout assistance", "Fast priority dispatch"],
       popular: true
     },
@@ -160,7 +160,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "$35 per tire",
       estimatedEta: "Fastest Arrival Time",
       iconName: "CircleDot",
-      image: "/images/MountBalance.jpg",
+      image: "./images/MountBalance.jpg",
       features: ["Mobile computerized spin balancing", "Touchless rim mounting technology", "TPMS sensor recalibration", "Precision torque verification"],
       popular: true
     },
@@ -172,7 +172,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "$50",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Truck",
-      image: "/images/mobile-call-off.jpg",
+      image: "./images/mobile-call-off.jpg",
       features: ["Direct unit dispatch to your location", "On-site vehicle diagnostic inspection", "Safety hazard perimeter setup", "Applicable toward full repair service"],
       popular: true
     },
@@ -184,7 +184,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "Starts at $99",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Droplet",
-      image: "/images/MobileOil.jpg",
+      image: "./images/MobileOil.jpg",
       features: ["Full synthetic motor oil & OEM filter", "Multi-point inspection & fluid level check", "Performed on-site at home or workplace", "Eco-friendly oil recycling & disposal"],
       popular: true
     },
@@ -196,7 +196,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "Starts from $180*",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Wrench",
-      image: "/images/BrakePad.jpg",
+      image: "./images/BrakePad.jpg",
       features: ["Premium ceramic or semi-metallic pads", "Caliper slide & pin lubrication", "Brake fluid & line safety inspection", "Starts from $180 (depends on brake pads)"],
       popular: true
     },
@@ -208,7 +208,7 @@ export const BUSINESS_CONFIG = {
       startingPrice: "Starts from $350*",
       estimatedEta: "Fastest Arrival Time",
       iconName: "Disc",
-      image: "/images/BrakePadsrota.jpg",
+      image: "./images/BrakePadsrota.jpg",
       features: ["Brand new precision disc rotors", "Matching premium ceramic brake pads", "Caliper hardware cleaning & bed-in check", "Starts from $350 (varies based on parts)"],
       popular: true
     }

@@ -54,6 +54,8 @@ export default function Hero({ onRequestService }) {
             <img
               src={slide.url}
               alt={slide.caption}
+              loading={idx === 0 ? "eager" : "lazy"}
+              decoding="async"
               className="w-full h-full object-cover object-center filter brightness-105 contrast-110 saturate-110"
             />
           </div>
@@ -212,7 +214,7 @@ export default function Hero({ onRequestService }) {
 
                 {/* Bright Crisp Image */}
                 <img 
-                  src="/images/homepage.jpg" 
+                  src="./images/homepage.jpg" 
                   alt="Call Tyrone 24/7 Roadside Service" 
                   fetchPriority="high"
                   width="448"

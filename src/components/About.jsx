@@ -33,8 +33,10 @@ export default function About() {
                 
                 {/* Service Van Image */}
                 <img
-                  src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=80"
+                  src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=75"
                   alt={`${BUSINESS_CONFIG.companyName} roadside technician servicing vehicle`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-[400px] sm:h-[460px] object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-105 contrast-105"
                 />
 
