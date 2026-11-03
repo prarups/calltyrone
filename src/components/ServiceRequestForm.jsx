@@ -164,7 +164,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
     });
 
     if (!result.ok) {
-      // Never show a fake success. Keep the form filled and offer Call/WhatsApp.
+      // Never show a fake success. Keep the form filled and offer direct phone call.
       setSubmitError(result.error || 'Something went wrong.');
       setIsSubmitting(false);
       return;

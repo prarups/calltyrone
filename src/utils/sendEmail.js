@@ -10,7 +10,7 @@ import { BUSINESS_CONFIG } from '../config/businessConfig';
  *   After activating, you can replace the email in settings.ini with the private
  *   random alias FormSubmit gives you, so the real address is not visible in the site.
  * - Every response is verified. Callers receive { ok: false } on any failure so the UI
- *   shows an error + Call/WhatsApp fallback instead of a fake success.
+ *   shows an error + Call fallback instead of a fake success.
  */
 const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/';
 const REQUEST_TIMEOUT_MS = 15000;

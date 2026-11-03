@@ -163,7 +163,7 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
     });
 
     if (!result.ok) {
-      // Never show a fake success. Keep the form filled and offer Call/WhatsApp.
+      // Never show a fake success. Keep the form filled and offer direct phone call.
       setSubmitError(result.error || 'Something went wrong.');
       setIsSubmitting(false);
       return;
@@ -625,7 +625,7 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
                   </div>
 
                   {/* Submit Button */}
-                  <FormErrorNotice message={submitError} whatsappText="Hi, I need a mobile battery replacement." />
+                  <FormErrorNotice message={submitError} />
                   <button
                     type="submit"
                     disabled={isSubmitting}

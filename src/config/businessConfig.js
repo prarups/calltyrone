@@ -12,9 +12,9 @@ export const BUSINESS_CONFIG = {
   phoneRaw: "+14044822246",
   altPhone: "(404) 482-2246",
   whatsappPhoneRaw: "14044822246", // Client USA WhatsApp target (404) 482-2246
-  email: "info@mobiletireplus.com",
-  supportEmail: "info@mobiletireplus.com",
-  dispatchEmail: "info@mobiletireplus.com", // Default inbox for form requests (FormSubmit). Overridden by settings.ini -> [forms] receive_email.
+  email: "Tyronne@call-tyrone.com",
+  supportEmail: "Tyronne@call-tyrone.com",
+  dispatchEmail: "Tyronne@call-tyrone.com", // Default inbox for form requests (FormSubmit). Overridden by settings.ini -> [forms] receive_email.
   website: "https://calltyrone.com",
   domain: "calltyrone.com",
   serverUrl: "https://api.calltyrone.com",

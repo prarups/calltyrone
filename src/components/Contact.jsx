@@ -216,7 +216,7 @@ export default function Contact({ onOpenDownloadGuide }) {
                   </div>
 
                   <div className="pt-2 space-y-2">
-                    <FormErrorNotice message={submitError} whatsappText="Hi, I have a fleet / service inquiry." />
+                    <FormErrorNotice message={submitError} />
                     <button
                       type="submit"
                       disabled={isSubmitting}
