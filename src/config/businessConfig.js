@@ -1,5 +1,7 @@
 // Centralized Business Configuration for Call Tyrone
 // Editable by client for easy maintenance without code changes.
+// NOTE: phone numbers, emails and the form key below are DEFAULTS.
+// On the live server they are overridden by `settings.ini` (no rebuild needed).
 
 export const BUSINESS_CONFIG = {
   name: "Call Tyrone",
@@ -12,7 +14,7 @@ export const BUSINESS_CONFIG = {
   whatsappPhoneRaw: "14044822246", // Client USA WhatsApp target (404) 482-2246
   email: "info@mobiletireplus.com",
   supportEmail: "info@mobiletireplus.com",
-  dispatchEmail: "info@mobiletireplus.com", // Target Email for receiving form requests via FormSubmit
+  dispatchEmail: "info@mobiletireplus.com", // Default inbox for form requests (FormSubmit). Overridden by settings.ini -> [forms] receive_email.
   website: "https://calltyrone.com",
   domain: "calltyrone.com",
   serverUrl: "https://api.calltyrone.com",
@@ -421,7 +423,10 @@ export const BUSINESS_CONFIG = {
     },
     {
       q: "What information do I need to request service?",
-      a: "You simply need your current location/address, vehicle Year/Make/Model, phone number (404-482-2246 for quick callback), and service needed."
+      // Getter so the number follows settings.ini automatically.
+      get a() {
+        return `You simply need your current location/address, vehicle Year/Make/Model, phone number, and service needed. For a quick callback, call ${BUSINESS_CONFIG.phone}.`;
+      }
     }
   ],
 

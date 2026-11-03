@@ -23,3 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 public/images_backup/
+
+# Private client documents (never deploy / never commit)
+private-docs/
+
+# Local secrets
+.env
+.env.local

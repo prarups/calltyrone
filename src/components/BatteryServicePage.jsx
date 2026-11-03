@@ -5,6 +5,9 @@ import {
 } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
 import { BATTERY_CATALOG, BATTERY_CATEGORIES } from '../config/batteryConfig';
+import { sendFormEmail } from '../utils/sendEmail';
+import FormHoneypot from './FormHoneypot';
+import FormErrorNotice from './FormErrorNotice';
 
 const getTodayDateString = () => {
   const now = new Date();
@@ -44,6 +47,7 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
   const [isLocating, setIsLocating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRequest, setSubmittedRequest] = useState(null);
+  const [submitError, setSubmitError] = useState('');
 
   const selectedBattery = BATTERY_CATALOG.find(b => b.id === selectedBatteryId) || BATTERY_CATALOG[0];
 
@@ -128,17 +132,15 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const honeypot = e.currentTarget.elements.namedItem('botcheck')?.value;
     setIsSubmitting(true);
+    setSubmitError('');
 
     const isAsap = serviceTiming === 'asap';
     const userLocation = formData.location.trim();
     const mapsUrl = formData.locationUrl || `https://maps.google.com/?q=${encodeURIComponent(userLocation)}`;
-    const targetEmail = BUSINESS_CONFIG.dispatchEmail || BUSINESS_CONFIG.email || 'info@mobiletireplus.com';
 
-    const emailPayload = {
-      _subject: `🔋 BATTERY REPLACEMENT DISPATCH: [${selectedBattery.name} - $${calculateTotal()}] - ${formData.fullName}`,
-      _captcha: "false",
-      _template: "table",
+    const emailFields = {
       "Service Requested": "Mobile Battery Replacement & Delivery",
       "Selected Battery Type": `${selectedBattery.name} (${selectedBattery.priceDisplay})`,
       "Total Estimated Base Price": `$${calculateTotal()}`,
@@ -154,14 +156,17 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
       "Submitted Time": new Date().toLocaleString()
     };
 
-    try {
-      await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(emailPayload)
-      });
-    } catch (err) {
-      console.warn("Battery FormSubmit error:", err);
+    const result = await sendFormEmail({
+      subject: `🔋 BATTERY REPLACEMENT DISPATCH: [${selectedBattery.name} - $${calculateTotal()}] - ${formData.fullName}`,
+      fields: emailFields,
+      honeypot
+    });
+
+    if (!result.ok) {
+      // Never show a fake success. Keep the form filled and offer Call/WhatsApp.
+      setSubmitError(result.error || 'Something went wrong.');
+      setIsSubmitting(false);
+      return;
     }
 
     const generatedId = generateBatteryRequestId();
@@ -433,7 +438,8 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
                 </div>
               ) : (
                 /* The Battery Form */
-                <form onSubmit={handleSubmit} className="space-y-3.5">
+                <form onSubmit={handleSubmit} className="space-y-3.5 relative">
+                  <FormHoneypot />
                   
                   {/* Selected Battery Overview Box */}
                   <div className="p-3 bg-slate-950 border border-blue-500/40 rounded-xl flex items-center justify-between gap-3">
@@ -619,6 +625,7 @@ export default function BatteryServicePage({ onBackToHome, onRequestSubmitted })
                   </div>
 
                   {/* Submit Button */}
+                  <FormErrorNotice message={submitError} whatsappText="Hi, I need a mobile battery replacement." />
                   <button
                     type="submit"
                     disabled={isSubmitting}

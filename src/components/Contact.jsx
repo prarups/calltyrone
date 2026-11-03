@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { PhoneCall, Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
+import { sendFormEmail } from '../utils/sendEmail';
+import FormHoneypot from './FormHoneypot';
+import FormErrorNotice from './FormErrorNotice';
 
 export default function Contact({ onOpenDownloadGuide }) {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
 
   const formatPhoneNumber = (value) => {
@@ -16,31 +21,28 @@ export default function Contact({ onOpenDownloadGuide }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const honeypot = e.currentTarget.elements.namedItem('botcheck')?.value;
+    setIsSubmitting(true);
+    setSubmitError('');
 
-    const targetEmail = BUSINESS_CONFIG.dispatchEmail || BUSINESS_CONFIG.email || 'info@mobiletireplus.com';
+    const result = await sendFormEmail({
+      subject: `💼 CORPORATE FLEET / CONTACT INQUIRY: ${form.name}`,
+      replyTo: form.email,
+      fields: {
+        "Sender Name": form.name,
+        "Sender Email": form.email,
+        "Phone Number": form.phone || 'Not Provided',
+        "Message / Inquiry": form.message,
+        "Submission Time": new Date().toLocaleString()
+      },
+      honeypot
+    });
 
-    const emailPayload = {
-      _subject: `💼 CORPORATE FLEET / CONTACT INQUIRY: ${form.name}`,
-      _captcha: "false",
-      _template: "table",
-      "Sender Name": form.name,
-      "Sender Email": form.email,
-      "Phone Number": form.phone || 'Not Provided',
-      "Message / Inquiry": form.message,
-      "Submission Time": new Date().toLocaleString()
-    };
+    setIsSubmitting(false);
 
-    try {
-      await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(emailPayload)
-      });
-    } catch (error) {
-      console.warn("Contact form FormSubmit error:", error);
+    if (!result.ok) {
+      setSubmitError(result.error || 'Something went wrong.');
+      return;
     }
 
     setSubmitted(true);
@@ -162,7 +164,8 @@ export default function Contact({ onOpenDownloadGuide }) {
                   <p className="text-xs text-slate-300">Your fleet inquiry has been emailed directly to our operations team. We will get back to you shortly.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 relative">
+                  <FormHoneypot />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="text-xs font-bold text-slate-300 uppercase">Your Name</label>
@@ -212,13 +215,15 @@ export default function Contact({ onOpenDownloadGuide }) {
                     ></textarea>
                   </div>
 
-                  <div className="pt-2">
+                  <div className="pt-2 space-y-2">
+                    <FormErrorNotice message={submitError} whatsappText="Hi, I have a fleet / service inquiry." />
                     <button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm py-3.5 px-4 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center gap-2.5 transition-all cursor-pointer hover:shadow-blue-900/40"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-sm py-3.5 px-4 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center gap-2.5 transition-all cursor-pointer hover:shadow-blue-900/40 disabled:opacity-50"
                     >
                       <Send className="w-5 h-5 shrink-0" />
-                      <span>Submit Inquiry</span>
+                      <span>{isSubmitting ? 'Sending...' : 'Submit Inquiry'}</span>
                     </button>
                   </div>
                 </form>

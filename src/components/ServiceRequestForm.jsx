@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { MapPin, Car, Phone, User, Disc, CheckCircle2, ShieldCheck, X, Calendar, Clock, Zap } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../config/businessConfig';
+import { sendFormEmail } from '../utils/sendEmail';
+import FormHoneypot from './FormHoneypot';
+import FormErrorNotice from './FormErrorNotice';
 
 const getTodayDateString = () => {
   const now = new Date();
@@ -41,6 +44,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
   const [isLocating, setIsLocating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRequest, setSubmittedRequest] = useState(null);
+  const [submitError, setSubmitError] = useState('');
 
   const formatPhoneNumber = (value) => {
     if (!value) return value;
@@ -127,7 +131,9 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const honeypot = e.currentTarget.elements.namedItem('botcheck')?.value;
     setIsSubmitting(true);
+    setSubmitError('');
 
     const selectedServiceObj = BUSINESS_CONFIG.services.find(s => s.id === formData.serviceId);
     const serviceTitle = selectedServiceObj ? selectedServiceObj.title : 'Roadside Assistance';
@@ -136,13 +142,8 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
     const userLocation = formData.location.trim();
     const mapsUrl = formData.locationUrl || `https://maps.google.com/?q=${encodeURIComponent(userLocation)}`;
 
-    const targetEmail = BUSINESS_CONFIG.dispatchEmail || BUSINESS_CONFIG.email || 'info@mobiletireplus.com';
-
     const isAsap = serviceTiming === 'asap';
-    const emailPayload = {
-      _subject: `🚨 NEW SERVICE DISPATCH: ${isAsap ? '[⚡ IMMEDIATE ASAP] ' : '[📅 SCHEDULED] '}${serviceTitle} - ${formData.fullName}`,
-      _captcha: "false",
-      _template: "table",
+    const emailFields = {
       "Dispatch Priority": isAsap ? "⚡ IMMEDIATE DISPATCH (VENTANE / RIGHT NOW)" : "📅 SCHEDULED APPOINTMENT",
       "Customer Name": formData.fullName,
       "Phone Number": formData.phone,
@@ -156,17 +157,17 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
       "Submitted Time": new Date().toLocaleString()
     };
 
-    try {
-      await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(emailPayload)
-      });
-    } catch (error) {
-      console.warn("FormSubmit email dispatch background error:", error);
+    const result = await sendFormEmail({
+      subject: `🚨 NEW SERVICE DISPATCH: ${isAsap ? '[⚡ IMMEDIATE ASAP] ' : '[📅 SCHEDULED] '}${serviceTitle} - ${formData.fullName}`,
+      fields: emailFields,
+      honeypot
+    });
+
+    if (!result.ok) {
+      // Never show a fake success. Keep the form filled and offer Call/WhatsApp.
+      setSubmitError(result.error || 'Something went wrong.');
+      setIsSubmitting(false);
+      return;
     }
 
     const generatedId = `MTP-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -274,7 +275,8 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
           </div>
         ) : (
           /* Simple & Easy Form */
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5 relative">
+            <FormHoneypot />
             
             {/* Name & Phone */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -470,6 +472,7 @@ export default function ServiceRequestForm({ preselectedService, onRequestSubmit
 
             {/* Submit Request Action Button */}
             <div className="pt-2 space-y-2">
+              <FormErrorNotice message={submitError} />
               <button
                 type="submit"
                 disabled={isSubmitting}
